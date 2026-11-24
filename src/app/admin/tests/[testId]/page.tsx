@@ -2,9 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { ConfirmButton } from "@/components/ConfirmButton";
+import { PdfImporter } from "@/components/PdfImporter";
 import { addQuestion, deleteQuestion, deleteTest, importQuestions, saveTest } from "../../actions";
 
-const LETTERS = ["A", "B", "C", "D", "E"];
+const LETTERS = ["A", "B", "C", "D", "E", "F"];
 const SAMPLE = `1. Hujayraning energiya markazi qaysi organoid?
 A) Yadro
 *B) Mitoxondriya
@@ -79,11 +80,13 @@ export default async function AdminTest({
         })}
       </section>
 
+      <PdfImporter testId={test.id} />
+
       <form action={addQuestion} className="card space-y-3">
         <h2 className="font-bold">➕ Bitta savol qo&apos;shish</h2>
         <input type="hidden" name="test_id" value={test.id} />
         <textarea name="text" className="input" rows={2} placeholder="Savol matni" required />
-        {LETTERS.map((l, i) => (
+        {LETTERS.slice(0, 5).map((l, i) => (
           <label key={l} className="flex items-center gap-2">
             <input type="radio" name="correct" value={i} required className="h-4 w-4 accent-brand-600" title="To'g'ri javob" />
             <span className="w-5 font-bold">{l})</span>

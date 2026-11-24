@@ -146,6 +146,41 @@ export async function importQuestions(formData: FormData) {
   redirect(`/admin/tests/${testId}?imported=${questions.length}`);
 }
 
+/** PDF'dan olingan (admin tekshirgan) savollarni bir yo'la saqlaydi. */
+export async function saveImportedQuestions(
+  testId: string,
+  items: { text: string; options: string[]; correct: number; explanation: string }[],
+): Promise<{ ok: true; count: number } | { ok: false; error: string }> {
+  const { supabase } = await requireAdmin();
+  const clean = items
+    .map((q) => ({
+      text: String(q.text ?? "").trim(),
+      options: (q.options ?? []).map((o) => String(o ?? "").trim()).slice(0, 6),
+      correct: Number(q.correct),
+      explanation: String(q.explanation ?? "").trim(),
+    }))
+    .filter((q) => q.text);
+  const bad = clean.findIndex((q) => q.options.length < 2 || q.options.some((o) => !o) || !(q.correct >= 0 && q.correct < q.options.length));
+  if (bad >= 0) return { ok: false, error: `${bad + 1}-savolda variantlar yoki to'g'ri javob to'liq emas.` };
+  if (!clean.length) return { ok: false, error: "Saqlash uchun savol yo'q." };
+
+  const start = await nextPosition(supabase, testId);
+  const { data, error } = await supabase
+    .from("questions")
+    .insert(clean.map((q, i) => ({ test_id: testId, text: q.text, options: q.options, position: start + i })))
+    .select("id, position");
+  if (error || !data) return { ok: false, error: error?.message ?? "Saqlashda xatolik" };
+  const byPos = new Map(data.map((r) => [r.position as number, r.id as string]));
+  const keys = clean.map((q, i) => ({ question_id: byPos.get(start + i)!, correct_index: q.correct, explanation: q.explanation }));
+  const { error: keyErr } = await supabase.from("question_keys").insert(keys);
+  if (keyErr) {
+    await supabase.from("questions").delete().in("id", data.map((r) => r.id));
+    return { ok: false, error: keyErr.message };
+  }
+  revalidatePath(`/admin/tests/${testId}`);
+  return { ok: true, count: clean.length };
+}
+
 export async function deleteQuestion(formData: FormData) {
   const { supabase } = await requireAdmin();
   check((await supabase.from("questions").delete().eq("id", str(formData, "id"))).error);
