@@ -125,6 +125,17 @@ B) Yadroda
 
 To'g'ri javob oldiga `*` qo'yiladi, savollar orasida bo'sh qator qoldiriladi. To'g'ri javoblar o'quvchiga test topshirilgandan keyingina ko'rsatiladi. Vaqt tugasa test avtomatik yakunlanadi.
 
+### PDF'dan 100 ta savolni birdaniga yuklash
+1. Test sahifasida **📄 PDF fayldan savollarni yuklash** bo'limida PDF'ni tanlang va **PDF'ni o'qish** ni bosing.
+2. 1–3 daqiqa kuting (sahifani yopmang). AI savollar, variantlar va to'g'ri javoblarni o'qiydi. PDF oxirida javoblar jadvali bo'lsa (`1-B, 2-C ...`), u ham hisobga olinadi.
+3. Ro'yxatni tekshiring:
+   - **sariq** savol — javobni AI tanlagan (PDF'da javob yo'q edi). To'g'ri bo'lsa doirachani bir marta bosib tasdiqlang, xato bo'lsa to'g'risini belgilang;
+   - **qizil** savol — javob topilmadi, o'zingiz belgilang;
+   - matn yoki variantda xato bo'lsa, shu yerning o'zida tuzating; keraksiz savolni **O'chirish**.
+4. **... ta savolni testga qo'shish** ni bosing.
+
+Maslahat: skanerlangan (rasm) PDF ham o'qiladi, lekin matnli PDF aniqroq. Bitta 100 savollik PDF taxminan $0.20–0.60 AI krediti sarflaydi.
+
 ### Jonli dars
 **Admin → Jonli darslar** → mavzu, vaqt (Toshkent vaqti) va Zoom/Google Meet havolasini kiriting. O'quvchilar uni kabinet va "Jonli darslar" sahifasida ko'radi. Dars tugagach, yozuvni YouTube (Unlisted) yoki Bunny'ga yuklab, o'sha darsni tahrirlab **yozuv havolasini** qo'shing — u arxivda paydo bo'ladi.
 
