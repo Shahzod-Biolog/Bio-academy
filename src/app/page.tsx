@@ -25,12 +25,12 @@ export default async function Home() {
       {/* Mikroskop ostidagi muqova */}
       <section className="relative grid items-center gap-12 py-10 sm:py-14 lg:min-h-[calc(100dvh-4rem)] lg:grid-cols-[1fr_1.05fr] lg:py-6">
         <div className="relative z-10">
-          <p className="eyebrow"><span className="h-2 w-2 rounded-full bg-brand-400 shadow-glow" /> Namuna: Elodea bargi · ×400</p>
+          <p className="eyebrow"><span className="h-2 w-2 rounded-full bg-brand-400 shadow-glow" /> Namuna: DNK qo&apos;sh spirali</p>
           <h1 className="mt-5 font-display text-[52px] font-bold leading-[0.95] tracking-[-0.03em] sm:text-7xl xl:text-[84px]">
             Ko&apos;zga ko&apos;rinmas dunyoni <span className="text-brand-400">kashf eting</span>
           </h1>
           <p className="mt-6 max-w-md text-[17px] leading-relaxed text-slate-600">
-            Har bir dars — mikroskop ostidagi yangi kashfiyot. Video, jonli efir va AI ustoz bilan biologiyani chuqur o&apos;rganing.
+            Hujayradan DNKgacha — har bir dars yangi kashfiyot. Video, jonli efir va AI ustoz bilan biologiyani chuqur o&apos;rganing.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/signup" className="btn-accent whitespace-nowrap px-7 py-4 text-base">
@@ -41,11 +41,11 @@ export default async function Home() {
         </div>
 
         <div className="relative mx-auto w-full max-w-[560px] px-8 py-10 sm:px-14">
-          <Lens className="w-full" zoom={1.7} focus="40% 45%" />
+          <Lens className="w-full" />
           <div className="readout absolute right-0 top-[18%] min-w-40 sm:right-2">
             <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-brand-300">Obyekt</span>
-            <b className="mt-0.5 block font-display text-xl text-slate-900">Xloroplast</b>
-            <span className="text-xs text-slate-500">fotosintez markazi</span>
+            <b className="mt-0.5 block font-display text-xl text-slate-900">DNK</b>
+            <span className="text-xs text-slate-500">irsiyat kaliti</span>
           </div>
           <div className="readout absolute bottom-[12%] left-0">
             <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-brand-300">Fanlar</span>
@@ -62,11 +62,11 @@ export default async function Home() {
       </section>
 
       {/* Fanlar lentasi */}
-      <section className="ml-[calc(50%-50vw)] w-screen overflow-hidden border-y border-line bg-night/70 py-4">
+      <section className="ml-[calc(50%-50vw)] w-screen overflow-hidden border-y border-line bg-panel py-4">
         <div className="flex w-max animate-[marquee_35s_linear_infinite] gap-10 pr-10">
           {[...TOPICS, ...TOPICS].map((t, i) => (
-            <span key={i} className="flex items-center gap-10 font-mono text-lg uppercase tracking-[0.2em] text-slate-700">
-              {t} <span className="text-brand-400">◉</span>
+            <span key={i} className="flex items-center gap-10 font-mono text-lg uppercase tracking-[0.2em] text-brand-100">
+              {t} <span className="text-sun-300">◉</span>
             </span>
           ))}
         </div>
@@ -88,9 +88,9 @@ export default async function Home() {
             <div key={f.n} className="card card-hover group relative overflow-hidden">
               <div className="flex items-center justify-between font-mono text-xs text-slate-500">
                 <span>{f.n}</span>
-                <span className="text-brand-300">{f.tag}</span>
+                <span className="text-brand-700">{f.tag}</span>
               </div>
-              <span className="icon-bubble mt-6 h-14 w-14 border border-brand-300/30 bg-brand-100 text-brand-400 transition group-hover:bg-brand-400 group-hover:text-night">
+              <span className="icon-bubble mt-6 h-14 w-14 border border-brand-300/30 bg-brand-100 text-brand-700 transition group-hover:bg-brand-400 group-hover:text-night">
                 <f.Icon size={26} />
               </span>
               <h3 className="mt-5 font-display text-2xl font-bold">{f.title}</h3>
@@ -111,7 +111,7 @@ export default async function Home() {
             Hisob ochish <ArrowRightIcon size={18} />
           </Link>
         </div>
-        <Lens className="mx-auto hidden w-56 md:block" hue={40} zoom={2.2} focus="70% 30%" ring={false} />
+        <Lens className="mx-auto hidden w-56 md:block" hue={40} ring={false} />
       </section>
     </div>
   );

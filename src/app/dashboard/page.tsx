@@ -32,9 +32,9 @@ export default async function Dashboard() {
   const firstName = (profile.full_name || "").split(" ")[0] || "o'quvchi";
 
   const stats = [
-    { label: "Kurslar", value: courses?.length ?? 0, Icon: BookIcon, cls: "bg-brand-100 text-brand-400" },
+    { label: "Kurslar", value: courses?.length ?? 0, Icon: BookIcon, cls: "bg-brand-100 text-brand-700" },
     { label: "Jonli darslar", value: upcoming?.length ?? 0, Icon: LiveIcon, cls: "bg-clay-100 text-clay-500" },
-    { label: "O'rtacha natija", value: avg === null ? "—" : `${avg}%`, Icon: ChartIcon, cls: "bg-sun-100 text-sun-300" },
+    { label: "O'rtacha natija", value: avg === null ? "—" : `${avg}%`, Icon: ChartIcon, cls: "bg-sun-100 text-sun-700" },
   ];
 
   return (
@@ -57,8 +57,8 @@ export default async function Dashboard() {
           </div>
         </div>
         <div className="relative hidden items-center justify-center p-10 md:flex">
-          <Lens className="w-full max-w-64" zoom={1.9} focus="60% 40%" />
-          <span className="absolute bottom-5 right-6 font-mono text-[11px] text-brand-300">×400</span>
+          <Lens className="w-full max-w-64" />
+          <span className="absolute bottom-5 right-6 font-mono text-[11px] text-brand-700">DNK · ×400</span>
         </div>
       </section>
 
@@ -81,7 +81,7 @@ export default async function Dashboard() {
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="section-title"><span className="icon-bubble h-9 w-9 bg-brand-100 text-brand-400"><BookIcon size={18} /></span> Kurslar</h2>
+          <h2 className="section-title"><span className="icon-bubble h-9 w-9 bg-brand-100 text-brand-700"><BookIcon size={18} /></span> Kurslar</h2>
           <Link href="/courses" className="inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-brand-300 hover:text-brand-400">Barchasi <ArrowRightIcon size={15} /></Link>
         </div>
         {courses && courses.length > 0 ? (
@@ -95,7 +95,7 @@ export default async function Dashboard() {
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="section-title"><span className="icon-bubble h-9 w-9 bg-sun-100 text-sun-300"><ClipboardIcon size={18} /></span> Oxirgi test natijalari</h2>
+          <h2 className="section-title"><span className="icon-bubble h-9 w-9 bg-sun-100 text-sun-700"><ClipboardIcon size={18} /></span> Oxirgi test natijalari</h2>
           <Link href="/results" className="inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-brand-300 hover:text-brand-400">Barchasi <ArrowRightIcon size={15} /></Link>
         </div>
         {attempts && attempts.length > 0 ? (

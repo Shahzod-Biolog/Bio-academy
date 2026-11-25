@@ -36,24 +36,24 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
 
       <section className="panel-sage grid md:grid-cols-[1.6fr_1fr]">
         <div className="p-6 sm:p-10">
-          <span className="icon-bubble h-14 w-14 rounded-xl border border-brand-300/30 bg-brand-100 text-brand-400"><Icon size={26} /></span>
+          <span className="icon-bubble h-14 w-14 rounded-xl border border-brand-300/30 bg-white text-brand-700"><Icon size={26} /></span>
           <h1 className="mt-5 font-display text-5xl font-bold leading-none tracking-[-0.03em] sm:text-7xl">{course.title}</h1>
           {course.description && <p className="mt-4 max-w-2xl text-[17px] text-slate-600">{course.description}</p>}
           <div className="mt-6 flex flex-wrap gap-2 text-sm">
-            <span className="chip border border-line bg-slate-50/80 font-mono uppercase tracking-[0.08em] text-brand-300"><LeafIcon size={14} /> {topics.length} ta mavzu</span>
-            <span className="chip border border-line bg-slate-50/80 font-mono uppercase tracking-[0.08em] text-brand-300"><PlayIcon size={14} /> {lessonCount} ta dars</span>
-            <span className="chip border border-line bg-slate-50/80 font-mono uppercase tracking-[0.08em] text-brand-300"><ClipboardIcon size={14} /> {testCount} ta test</span>
+            <span className="chip border border-line bg-slate-50/80 font-mono uppercase tracking-[0.08em] text-brand-700"><LeafIcon size={14} /> {topics.length} ta mavzu</span>
+            <span className="chip border border-line bg-slate-50/80 font-mono uppercase tracking-[0.08em] text-brand-700"><PlayIcon size={14} /> {lessonCount} ta dars</span>
+            <span className="chip border border-line bg-slate-50/80 font-mono uppercase tracking-[0.08em] text-brand-700"><ClipboardIcon size={14} /> {testCount} ta test</span>
           </div>
         </div>
         <div className="relative hidden items-center justify-center p-10 md:flex">
-          <Lens className="w-full max-w-60" hue={30} zoom={1.8} focus="30% 60%" />
+          <Lens className="w-full max-w-60" hue={30} />
         </div>
       </section>
 
       <ol className="relative space-y-5 before:absolute before:bottom-6 before:left-[1.35rem] before:top-6 before:w-px before:bg-line sm:before:left-[1.65rem]">
         {topics.map((t, i) => (
           <li key={t.id} className="relative flex gap-3 sm:gap-5">
-            <span className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-brand-400/60 bg-slate-50 font-mono text-base font-bold text-brand-400 shadow-glow sm:h-14 sm:w-14 sm:text-xl">
+            <span className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-brand-400/60 bg-white font-mono text-base font-bold text-brand-700 shadow-glow sm:h-14 sm:w-14 sm:text-xl">
               {i + 1}
             </span>
             <section className="card min-w-0 flex-1">
@@ -64,7 +64,7 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
                 {[...t.lessons].sort((a, b) => a.position - b.position).map((l) => (
                   <li key={l.id}>
                     <Link href={`/lessons/${l.id}`} className="group flex items-center gap-3 rounded-xl border border-line bg-slate-50 px-4 py-3 transition hover:border-brand-400">
-                      <span className="icon-bubble h-9 w-9 bg-brand-100 text-brand-400 transition group-hover:bg-brand-400 group-hover:text-night"><PlayIcon size={18} /></span>
+                      <span className="icon-bubble h-9 w-9 bg-brand-100 text-brand-700 transition group-hover:bg-brand-400 group-hover:text-night"><PlayIcon size={18} /></span>
                       <span className="min-w-0 flex-1 font-medium">{l.title}</span>
                       <ArrowRightIcon size={16} className="shrink-0 text-slate-300 transition group-hover:translate-x-0.5 group-hover:text-slate-900" />
                     </Link>

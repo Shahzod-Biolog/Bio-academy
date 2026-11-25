@@ -27,7 +27,7 @@ export function AuthForm({ mode, next }: { mode: "login" | "signup"; next?: stri
             </li>
           ))}
         </ul>
-        <div className="absolute -bottom-20 -right-20 w-80"><Lens className="w-full" zoom={1.8} focus="45% 50%" /></div>
+        <div className="absolute -bottom-20 -right-20 w-80"><Lens className="w-full" /></div>
       </div>
 
       <div className="p-6 sm:p-10">

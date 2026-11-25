@@ -12,93 +12,72 @@
   --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --color-night: #04130d;
-  --color-paper: #0a1813;
-  --color-panel: #0c1d17;
-  --color-line: #1f3a31;
+  --color-paper: #ffffff;
+  --color-panel: #0e3a2a;
+  --color-line: #c3e6d2;
 
-  --color-brand-50: #0b2119;
-  --color-brand-100: #0f2c21;
-  --color-brand-200: #12392b;
-  --color-brand-300: #7fe0bf;
-  --color-brand-400: #3ddc97;
-  --color-brand-500: #2cc786;
-  --color-brand-600: #3ddc97;
-  --color-brand-700: #5fe3aa;
-  --color-brand-800: #8eeac4;
-  --color-brand-900: #b9f2da;
+  --color-brand-50: #e8f8ef;
+  --color-brand-100: #d3f2e1;
+  --color-brand-200: #b4e9cc;
+  --color-brand-300: #0e8a56;
+  --color-brand-400: #1fbf78;
+  --color-brand-500: #15a46a;
+  --color-brand-600: #0f8a57;
+  --color-brand-700: #0c7a4c;
+  --color-brand-800: #0a6640;
+  --color-brand-900: #08502f;
   --color-brand-950: #04130d;
 
-  --color-clay-50: #2a1710;
-  --color-clay-100: #3b1f14;
-  --color-clay-300: #ffb59a;
-  --color-clay-500: #ff7a50;
-  --color-clay-600: #ff9671;
-  --color-clay-700: #ffb08f;
+  --color-clay-50: #fff1eb;
+  --color-clay-100: #ffe0d3;
+  --color-clay-300: #ffab8a;
+  --color-clay-500: #f0602f;
+  --color-clay-600: #d94f20;
+  --color-clay-700: #b13f17;
 
-  --color-sun-50: #231c0b;
-  --color-sun-100: #30260d;
-  --color-sun-300: #e8b64c;
-  --color-sun-400: #f0c35e;
-  --color-sun-600: #f0c35e;
-  --color-sun-700: #f5cf78;
+  --color-sun-50: #fff8e6;
+  --color-sun-100: #fdeec2;
+  --color-sun-300: #f2b632;
+  --color-sun-400: #e8a41c;
+  --color-sun-600: #b07a0c;
+  --color-sun-700: #8f6206;
 
-  --color-teal-50: #0a1f1e;
-  --color-teal-100: #0e2c2a;
-  --color-teal-400: #5fd4c8;
-  --color-teal-500: #3cc0b2;
-  --color-teal-600: #6fe0d4;
+  --color-teal-50: #e8f7f5;
+  --color-teal-100: #cdeee9;
+  --color-teal-400: #3cc0b2;
+  --color-teal-500: #23a596;
+  --color-teal-600: #178577;
 
-  --color-slate-50: #06100d;
-  --color-slate-100: #0f201a;
-  --color-slate-200: #1a2f28;
-  --color-slate-300: #2c463d;
-  --color-slate-400: #66807a;
-  --color-slate-500: #8aa39a;
-  --color-slate-600: #a6bbb3;
-  --color-slate-700: #c3d4cd;
-  --color-slate-800: #d9e6e0;
-  --color-slate-900: #f0f7f3;
+  /* Yorqin och yashil neytrallar */
+  --color-slate-50: #e6f7ec;
+  --color-slate-100: #d8f1e2;
+  --color-slate-200: #c3e6d2;
+  --color-slate-300: #a2d3b7;
+  --color-slate-400: #6f9a85;
+  --color-slate-500: #4d7363;
+  --color-slate-600: #3b5d4e;
+  --color-slate-700: #2a483b;
+  --color-slate-800: #1a3529;
+  --color-slate-900: #0a2a1d;
 
-  --color-red-50: #2a1214;
-  --color-red-100: #3a1519;
-  --color-red-300: #7a2b30;
-  --color-red-400: #f87171;
-  --color-red-700: #fca5a5;
-  --color-red-800: #fecaca;
-
-  --color-amber-50: #241b08;
-  --color-amber-100: #33260a;
-  --color-amber-200: #4a370f;
-  --color-amber-300: #6b5215;
-  --color-amber-400: #f5c04a;
-  --color-amber-700: #fcd34d;
-  --color-amber-800: #fde68a;
-
-  --color-rose-100: #3a1422;
-  --color-rose-200: #5a1e33;
-  --color-rose-300: #fda4af;
-  --color-rose-400: #fb7185;
-  --color-rose-500: #f43f5e;
-  --color-rose-600: #fb7185;
-  --color-rose-700: #fda4af;
-
-  --shadow-soft: 0 1px 0 rgb(127 224 191 / 0.04);
-  --shadow-lift: 0 24px 60px -24px rgb(61 220 151 / 0.3);
-  --shadow-glow: 0 0 32px -6px rgb(61 220 151 / 0.55);
+  --shadow-soft: 0 1px 2px rgb(10 42 29 / 0.06);
+  --shadow-lift: 0 24px 60px -24px rgb(15 138 87 / 0.35);
+  --shadow-glow: 0 10px 30px -8px rgb(31 191 120 / 0.6);
 }
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
     -webkit-tap-highlight-color: transparent;
   }
   body {
     @apply min-h-dvh bg-slate-50 font-sans text-slate-800 antialiased;
     background-image:
-      radial-gradient(60rem 40rem at 85% -10%, rgb(61 220 151 / 0.08), transparent 70%),
-      linear-gradient(rgb(127 224 191 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(127 224 191 / 0.045) 1px, transparent 1px);
-    background-size: auto, 40px 40px, 40px 40px;
+      radial-gradient(60rem 40rem at 85% -10%, rgb(160 240 196 / 0.7), transparent 70%),
+      radial-gradient(50rem 30rem at -10% 60%, rgb(200 250 222 / 0.8), transparent 70%),
+      linear-gradient(rgb(20 164 103 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(20 164 103 / 0.07) 1px, transparent 1px);
+    background-size: auto, auto, 40px 40px, 40px 40px;
   }
   h1, h2, h3 {
     @apply font-display tracking-tight text-slate-900;
@@ -110,7 +89,7 @@
 
 @layer components {
 .card {
-  @apply rounded-2xl border border-line bg-paper/90 p-5 backdrop-blur-sm;
+  @apply rounded-2xl border border-line bg-paper/90 p-5 shadow-soft backdrop-blur-sm;
 }
 .card-hover {
   @apply transition duration-200 hover:-translate-y-0.5 hover:border-brand-400/60 hover:shadow-glow;
@@ -129,11 +108,11 @@
   @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
 }
 .btn-danger {
-  @apply inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-sm font-medium text-red-400 transition hover:bg-red-50;
+  @apply inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-sm font-medium text-red-700 transition hover:bg-red-50;
 }
 
 .input {
-  @apply min-h-11 w-full rounded-xl border border-line bg-slate-50/70 px-4 py-2.5 text-[15px] text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-400/15;
+  @apply min-h-11 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-[15px] text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-400/15;
 }
 .label {
   @apply mb-1.5 block font-mono text-xs font-semibold uppercase tracking-[0.12em] text-slate-600;
@@ -165,15 +144,15 @@
 }
 /* Asosiy "laboratoriya" paneli (eski nomi saqlangan) */
 .panel-sage {
-  @apply relative overflow-hidden rounded-3xl border border-line bg-paper;
+  @apply relative overflow-hidden rounded-3xl border border-line bg-brand-100;
   background-image:
-    radial-gradient(40rem 24rem at 100% 50%, rgb(61 220 151 / 0.12), transparent 70%),
-    linear-gradient(rgb(127 224 191 / 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(127 224 191 / 0.05) 1px, transparent 1px);
+    radial-gradient(40rem 24rem at 100% 50%, rgb(255 255 255 / 0.75), transparent 70%),
+    linear-gradient(rgb(20 164 103 / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(20 164 103 / 0.08) 1px, transparent 1px);
   background-size: auto, 24px 24px, 24px 24px;
 }
 .readout {
-  @apply rounded-xl border border-brand-300/25 bg-slate-50/80 px-3.5 py-3 backdrop-blur-md;
+  @apply rounded-xl border border-brand-300/25 bg-white/85 px-3.5 py-3 shadow-lift backdrop-blur-md;
 }
 .text-gradient {
   @apply text-brand-400;
@@ -188,15 +167,27 @@
 /* Mikroskop linzasi */
 .lens-glass {
   box-shadow:
-    0 0 0 10px #0d1f19,
-    0 0 0 11px rgb(127 224 191 / 0.35),
-    0 0 0 28px rgb(13 31 25 / 0.55),
-    0 0 90px 20px rgb(61 220 151 / 0.22);
+    0 0 0 10px #ffffff,
+    0 0 0 11px rgb(20 164 103 / 0.35),
+    0 0 0 28px rgb(255 255 255 / 0.55),
+    0 30px 90px 10px rgb(15 138 87 / 0.35);
 }
 .lens-vignette {
   background:
-    radial-gradient(circle at 50% 50%, transparent 55%, rgb(0 0 0 / 0.65) 100%),
-    radial-gradient(circle at 33% 28%, rgb(255 255 255 / 0.18), transparent 30%);
+    radial-gradient(circle at 50% 50%, transparent 58%, rgb(1 14 10 / 0.7) 100%),
+    radial-gradient(circle at 32% 26%, rgb(255 255 255 / 0.22), transparent 28%);
+}
+/* DNK preparati foni: chuqur okean-yashil, mayda "bokeh" zarrachalar bilan */
+.lens-bg {
+  background:
+    radial-gradient(circle at 20% 75%, rgb(95 212 200 / 0.35) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 20%, rgb(242 182 50 / 0.45) 0 2px, transparent 3px),
+    radial-gradient(circle at 65% 82%, rgb(255 255 255 / 0.35) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 30% 30%, rgb(61 220 151 / 0.25) 0 3px, transparent 6px),
+    radial-gradient(circle at 50% 45%, #0d5a40 0%, #063a2a 45%, #021a12 100%);
+}
+.dna-scroll {
+  animation: dna-twist 9s linear infinite;
 }
 
 details > summary {
@@ -218,6 +209,11 @@ details > summary::-webkit-details-marker {
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+/* Spiral davriy: bir davrga surilganda aylanayotgandek ko'rinadi */
+@keyframes dna-twist {
+  from { transform: translateY(0); }
+  to { transform: translateY(-16.6667%); }
 }
 @keyframes scan {
   0%, 100% { transform: translateY(-40%); opacity: 0; }

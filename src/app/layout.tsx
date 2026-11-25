@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-dvh flex-col overflow-x-clip">
         <Header />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-10">{children}</main>
-        <footer className="mt-16 border-t border-line bg-night/80">
+        <footer className="mt-16 border-t border-line bg-white/70 backdrop-blur">
           <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-8 sm:flex-row sm:px-6">
             <span className="flex items-center gap-2.5 font-display text-lg font-bold text-slate-900">
               <LogoMark size={26} /> Bio <span className="-ml-1.5 text-brand-400">Academy</span>
