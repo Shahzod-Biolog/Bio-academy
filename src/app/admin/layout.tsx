@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/auth";
+import { BookIcon, LiveIcon, ShieldIcon } from "@/components/Icons";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   await requireAdmin();
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-2 rounded-lg bg-slate-800 px-2.5 py-1 text-xs font-bold uppercase text-white">Admin</span>
-        <Link href="/admin" className="btn-outline py-1.5">📚 Kurslar va darslar</Link>
-        <Link href="/admin/live" className="btn-outline py-1.5">🔴 Jonli darslar</Link>
+      <div className="flex flex-wrap items-center gap-2 rounded-3xl border border-slate-200/80 bg-white/80 p-2 shadow-soft">
+        <span className="chip mr-1 bg-brand-900 px-3 py-2 text-white"><ShieldIcon size={14} /> Admin panel</span>
+        <Link href="/admin" className="btn-ghost"><BookIcon size={17} /> Kurslar va darslar</Link>
+        <Link href="/admin/live" className="btn-ghost"><LiveIcon size={17} /> Jonli darslar</Link>
       </div>
       {children}
     </div>

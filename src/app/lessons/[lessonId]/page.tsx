@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { LessonChat } from "@/components/LessonChat";
+import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, ClipboardIcon, NotesIcon, PlayIcon } from "@/components/Icons";
 import type { VideoProvider } from "@/lib/video";
 
 export default async function LessonPage({ params }: { params: Promise<{ lessonId: string }> }) {
@@ -24,50 +25,71 @@ export default async function LessonPage({ params }: { params: Promise<{ lessonI
   const nextLesson = idx >= 0 ? siblings?.[idx + 1] : undefined;
 
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
-      <div className="space-y-5 lg:col-span-2">
+    <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
+      <div className="min-w-0 space-y-6 lg:col-span-2">
         <div>
           {topic && (
-            <Link href={`/courses/${topic.course_id}`} className="text-sm text-slate-500">
-              ← {topic.courses?.title} / {topic.title}
+            <Link href={`/courses/${topic.course_id}`} className="back-link">
+              <ArrowLeftIcon size={16} /> {topic.courses?.title} / {topic.title}
             </Link>
           )}
-          <h1 className="mt-1 text-2xl font-bold">{lesson.title}</h1>
+          <h1 className="page-title mt-2 text-2xl sm:text-3xl">{lesson.title}</h1>
         </div>
         <VideoPlayer provider={lesson.video_provider as VideoProvider} videoRef={lesson.video_ref} title={lesson.title} />
-        {lesson.description && <p className="text-slate-600">{lesson.description}</p>}
+        {lesson.description && <p className="text-[16px] leading-relaxed text-slate-600">{lesson.description}</p>}
 
         <LessonChat lessonId={lesson.id} />
 
         {lesson.notes && (
-          <details className="card" open>
-            <summary className="cursor-pointer font-bold">📄 Dars konspekti</summary>
-            <div className="prose-notes mt-3">{lesson.notes}</div>
+          <details className="card group p-0" open>
+            <summary className="flex cursor-pointer items-center gap-3 px-5 py-4">
+              <span className="icon-bubble h-10 w-10 rounded-xl bg-teal-100 text-teal-600"><NotesIcon size={20} /></span>
+              <span className="flex-1 font-display text-lg font-semibold">Dars konspekti</span>
+              <ArrowRightIcon size={18} className="text-slate-400 transition group-open:rotate-90" />
+            </summary>
+            <div className="prose-notes border-t border-slate-100 px-5 py-5">{lesson.notes}</div>
           </details>
         )}
       </div>
 
-      <aside className="space-y-4">
+      <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
         <div className="card">
-          <h2 className="mb-3 font-bold">Mavzu darslari</h2>
-          <ul className="space-y-1">
-            {siblings?.map((s) => (
-              <li key={s.id}>
-                <Link
-                  href={`/lessons/${s.id}`}
-                  className={"block rounded-lg px-3 py-2 text-sm " + (s.id === lesson.id ? "bg-brand-50 font-semibold text-brand-700" : "hover:bg-slate-100")}
-                >
-                  {s.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <h2 className="mb-3 font-display text-lg font-semibold">Mavzu darslari</h2>
+          <ol className="space-y-1">
+            {siblings?.map((s, i) => {
+              const current = s.id === lesson.id;
+              const done = idx >= 0 && i < idx;
+              return (
+                <li key={s.id}>
+                  <Link
+                    href={`/lessons/${s.id}`}
+                    className={
+                      "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm transition " +
+                      (current ? "bg-brand-50 font-semibold text-brand-800 ring-1 ring-brand-200" : "text-slate-600 hover:bg-slate-100")
+                    }
+                  >
+                    <span
+                      className={
+                        "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold " +
+                        (current ? "bg-brand-600 text-white" : done ? "bg-brand-100 text-brand-700" : "bg-slate-100 text-slate-500")
+                      }
+                    >
+                      {current ? <PlayIcon size={14} /> : done ? <CheckIcon size={14} /> : i + 1}
+                    </span>
+                    <span className="min-w-0 flex-1">{s.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ol>
         </div>
         {nextLesson && (
-          <Link href={`/lessons/${nextLesson.id}`} className="btn w-full">Keyingi dars →</Link>
+          <Link href={`/lessons/${nextLesson.id}`} className="btn w-full py-3">Keyingi dars <ArrowRightIcon size={18} /></Link>
         )}
         {tests?.map((t) => (
-          <Link key={t.id} href={`/tests/${t.id}`} className="btn-outline w-full">📝 {t.title}</Link>
+          <Link key={t.id} href={`/tests/${t.id}`} className="btn-outline w-full border-sun-300 bg-sun-50 text-sun-700 hover:border-sun-400 hover:bg-sun-100 hover:text-sun-700">
+            <ClipboardIcon size={18} /> {t.title}
+          </Link>
         ))}
       </aside>
     </div>

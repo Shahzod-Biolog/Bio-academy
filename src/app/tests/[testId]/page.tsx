@@ -3,6 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth";
 import { formatDateTime } from "@/lib/format";
 import { TestRunner } from "@/components/TestRunner";
+import { ScoreBadge } from "@/components/CourseCard";
+import { ArrowLeftIcon, ClipboardIcon, ClockIcon, LightbulbIcon } from "@/components/Icons";
 import { startTest } from "../actions";
 
 const COUNT_CHOICES = [10, 20, 30, 40, 50];
@@ -46,7 +48,7 @@ export default async function TestPage({
     const attemptQuestions = chosen ? (questions ?? []).filter((q) => chosen.includes(q.id)) : (questions ?? []);
     return (
       <div className="mx-auto max-w-3xl">
-        <h1 className="mb-4 text-2xl font-bold">{test.title}</h1>
+        <h1 className="page-title mb-4 text-2xl sm:text-3xl">{test.title}</h1>
         <TestRunner
           attemptId={attempt.id}
           deadline={deadline}
@@ -82,17 +84,29 @@ export default async function TestPage({
 
   return (
     <div className="mx-auto max-w-2xl space-y-5">
-      {topic && <Link href={`/courses/${topic.course_id}`} className="text-sm text-slate-500">← {topic.title}</Link>}
-      <div className="card space-y-4 p-6">
-        <h1 className="text-2xl font-bold">📝 {test.title}</h1>
-        <ul className="space-y-1 text-slate-600">
-          <li>Testdagi savollar: <b>{pool}</b></li>
-          <li>Barcha savollar uchun vaqt: <b>{test.time_limit_minutes} daqiqa</b></li>
-          <li>Vaqt tugaganda test avtomatik yakunlanadi.</li>
-        </ul>
+      {topic && <Link href={`/courses/${topic.course_id}`} className="back-link"><ArrowLeftIcon size={16} /> {topic.title}</Link>}
+      <div className="card space-y-6 p-6 sm:p-8">
+        <div className="flex items-start gap-4">
+          <span className="icon-bubble h-14 w-14 bg-sun-100 text-sun-700"><ClipboardIcon size={28} /></span>
+          <div>
+            <p className="eyebrow text-sun-700">Test</p>
+            <h1 className="mt-1 font-display text-2xl font-semibold sm:text-3xl">{test.title}</h1>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-2xl font-extrabold text-slate-900">{pool}</p>
+            <p className="text-sm text-slate-500">ta savol</p>
+          </div>
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="flex items-center gap-1.5 text-2xl font-extrabold text-slate-900"><ClockIcon size={20} className="text-brand-600" />{test.time_limit_minutes}</p>
+            <p className="text-sm text-slate-500">daqiqa (barcha savollarga)</p>
+          </div>
+        </div>
+        <p className="flex items-center gap-2 text-sm text-slate-500"><LightbulbIcon size={16} className="shrink-0 text-sun-600" /> Vaqt tugaganda test avtomatik yakunlanadi.</p>
         {pool > 0 && openActive ? (
           <div className="space-y-3">
-            <p className="rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
+            <p className="rounded-2xl bg-sun-50 p-4 text-sm text-sun-700 ring-1 ring-sun-100">
               Sizda boshlangan, lekin yakunlanmagan test bor
               {open.question_ids ? ` (${(open.question_ids as string[]).length} ta savol)` : ""}.
             </p>
@@ -105,12 +119,12 @@ export default async function TestPage({
             <input type="hidden" name="test_id" value={test.id} />
             {countOptions.length > 0 && (
               <fieldset>
-                <legend className="mb-2 font-semibold">Nechta savol yechasiz?</legend>
+                <legend className="mb-3 font-display text-lg font-semibold text-slate-900">Nechta savol yechasiz?</legend>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {countOptions.map((n) => (
                     <label key={n} className="cursor-pointer">
                       <input type="radio" name="count" value={n} className="peer sr-only" />
-                      <span className="block rounded-xl border border-slate-200 px-3 py-3 text-center transition peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-800 hover:border-slate-400">
+                      <span className="block rounded-2xl border border-slate-200 bg-white px-3 py-3.5 text-center transition peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-800 peer-checked:ring-2 peer-checked:ring-brand-100 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-300 hover:border-brand-300">
                         <b className="block text-lg">{n} ta</b>
                         <span className="text-xs text-slate-500">{minutesFor(n)} daqiqa</span>
                       </span>
@@ -118,7 +132,7 @@ export default async function TestPage({
                   ))}
                   <label className="cursor-pointer">
                     <input type="radio" name="count" value="all" defaultChecked className="peer sr-only" />
-                    <span className="block rounded-xl border border-slate-200 px-3 py-3 text-center transition peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-800 hover:border-slate-400">
+                    <span className="block rounded-2xl border border-slate-200 bg-white px-3 py-3.5 text-center transition peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-800 peer-checked:ring-2 peer-checked:ring-brand-100 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-300 hover:border-brand-300">
                       <b className="block text-lg">Barchasi</b>
                       <span className="text-xs text-slate-500">{pool} ta · {test.time_limit_minutes} daqiqa</span>
                     </span>
@@ -136,13 +150,13 @@ export default async function TestPage({
 
       {attempts && attempts.length > 0 && (
         <div className="card">
-          <h2 className="mb-2 font-bold">Oldingi urinishlaringiz</h2>
+          <h2 className="mb-2 font-display text-lg font-semibold">Oldingi urinishlaringiz</h2>
           <ul className="divide-y divide-slate-100">
             {attempts.map((a) => (
               <li key={a.id}>
-                <Link href={`/results/${a.id}`} className="flex justify-between py-2 text-sm hover:text-brand-700">
+                <Link href={`/results/${a.id}`} className="flex items-center justify-between gap-3 py-3 text-sm hover:text-brand-700">
                   <span>{formatDateTime(a.finished_at!)}</span>
-                  <b>{a.score}/{a.total}</b>
+                  <ScoreBadge score={a.score} total={a.total} />
                 </Link>
               </li>
             ))}

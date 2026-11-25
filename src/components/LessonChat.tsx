@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { SendIcon, SparkIcon } from "./Icons";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -62,14 +63,17 @@ export function LessonChat({ lessonId }: { lessonId: string }) {
   }
 
   return (
-    <section className="card flex flex-col p-0">
-      <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
-        <div>
-          <h2 className="font-bold">🤖 AI yordamchi</h2>
-          <p className="text-xs text-slate-500">Dars bo&apos;yicha tushunmagan savolingizni bering</p>
+    <section className="card flex flex-col overflow-hidden p-0">
+      <div className="flex items-center justify-between gap-3 border-b border-slate-100 bg-gradient-to-r from-teal-50 to-brand-50 px-5 py-4">
+        <div className="flex items-center gap-3">
+          <span className="icon-bubble h-10 w-10 rounded-xl bg-gradient-to-br from-teal-400 to-brand-600 text-white shadow-soft"><SparkIcon size={20} /></span>
+          <div>
+            <h2 className="font-display text-lg font-semibold leading-tight">AI yordamchi</h2>
+            <p className="text-xs text-slate-500">Dars bo&apos;yicha tushunmagan savolingizni bering</p>
+          </div>
         </div>
         {messages.length > 0 && (
-          <button onClick={() => setMessages([])} className="text-xs text-slate-400 hover:text-slate-600" disabled={loading}>
+          <button onClick={() => setMessages([])} className="rounded-full px-3 py-1 text-xs font-semibold text-slate-500 hover:bg-white hover:text-slate-700" disabled={loading}>
             Tozalash
           </button>
         )}
@@ -79,7 +83,7 @@ export function LessonChat({ lessonId }: { lessonId: string }) {
         {messages.length === 0 && (
           <div className="flex flex-wrap gap-2">
             {SUGGESTIONS.map((s) => (
-              <button key={s} onClick={() => send(s)} className="rounded-full border border-brand-100 bg-brand-50 px-3 py-1.5 text-sm text-brand-700 hover:border-brand-500">
+              <button key={s} onClick={() => send(s)} className="rounded-full border border-brand-200 bg-white px-4 py-2 text-sm font-medium text-brand-700 transition hover:border-brand-500 hover:bg-brand-50">
                 {s}
               </button>
             ))}
@@ -89,8 +93,8 @@ export function LessonChat({ lessonId }: { lessonId: string }) {
           <div key={i} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
             <div
               className={
-                "max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-[15px] leading-6 " +
-                (m.role === "user" ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-800")
+                "max-w-[85%] whitespace-pre-wrap rounded-3xl px-4 py-2.5 text-[15px] leading-6 " +
+                (m.role === "user" ? "rounded-br-lg bg-brand-600 text-white" : "rounded-bl-lg bg-slate-100 text-slate-800")
               }
             >
               {m.content || <span className="animate-pulse text-slate-400">Yozmoqda...</span>}
@@ -105,7 +109,7 @@ export function LessonChat({ lessonId }: { lessonId: string }) {
           e.preventDefault();
           send(input);
         }}
-        className="flex gap-2 border-t border-slate-100 p-3"
+        className="flex gap-2 border-t border-slate-100 bg-slate-50/60 p-3"
       >
         <input
           value={input}
@@ -115,8 +119,8 @@ export function LessonChat({ lessonId }: { lessonId: string }) {
           maxLength={2000}
           disabled={loading}
         />
-        <button className="btn shrink-0" disabled={loading || !input.trim()}>
-          Yuborish
+        <button className="btn shrink-0 px-4" disabled={loading || !input.trim()} aria-label="Yuborish">
+          <SendIcon size={18} /> <span className="hidden sm:inline">Yuborish</span>
         </button>
       </form>
     </section>
