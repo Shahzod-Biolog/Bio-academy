@@ -27,7 +27,7 @@ export default async function LivePage() {
               return (
                 <div key={s.id} className={"card flex flex-col " + (started ? "ring-2 ring-rose-200" : "")}>
                   {started && <span className="chip mb-3 w-fit bg-rose-100 text-rose-700"><span className="h-2 w-2 animate-pulse rounded-full bg-rose-500" /> HOZIR EFIRDA</span>}
-                  <p className="font-display text-xl font-semibold text-slate-900">{s.title}</p>
+                  <p className="font-display text-xl font-bold text-slate-900">{s.title}</p>
                   <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-500"><CalendarIcon size={15} /> {formatDateTime(s.starts_at)} (Toshkent vaqti)</p>
                   {s.description && <p className="mb-4 mt-2 text-sm text-slate-600">{s.description}</p>}
                   {s.meeting_url ? (

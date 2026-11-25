@@ -5,14 +5,14 @@ export function VideoPlayer({ provider, videoRef, title }: { provider: VideoProv
   const src = embedUrl(provider, videoRef);
   if (!src) {
     return (
-      <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-slate-300 bg-gradient-to-br from-slate-100 to-brand-50 text-slate-500">
-        <PlayIcon size={40} className="text-brand-300" />
+      <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-2xl bg-ink-900 text-slate-400">
+        <PlayIcon size={44} className="text-brand-400" />
         Video hali joylanmagan
       </div>
     );
   }
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-brand-950 shadow-lift ring-1 ring-slate-900/5">
+    <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-brand-950 shadow-lift ring-1 ring-slate-900/5">
       <iframe
         src={src}
         title={title}

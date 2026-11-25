@@ -25,9 +25,15 @@ export function NavLinks({ links, vertical = false, onNavigate }: { links: NavIt
             href={l.href}
             onClick={onNavigate}
             className={
-              "flex items-center gap-2 rounded-full font-semibold transition " +
+              "flex items-center gap-2 rounded-xl font-semibold transition " +
               (vertical ? "px-4 py-3 text-base " : "px-3.5 py-2 text-sm ") +
-              (active ? "bg-brand-50 text-brand-700 ring-1 ring-brand-200" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900")
+              (vertical
+                ? active
+                  ? "bg-brand-400/15 text-brand-300"
+                  : "text-slate-300 hover:bg-white/5 hover:text-white"
+                : active
+                  ? "bg-white/10 text-brand-300"
+                  : "text-slate-400 hover:bg-white/5 hover:text-white")
             }
           >
             <Icon size={vertical ? 20 : 17} />

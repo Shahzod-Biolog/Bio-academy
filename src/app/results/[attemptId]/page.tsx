@@ -28,14 +28,14 @@ export default async function ResultPage({ params }: { params: Promise<{ attempt
   return (
     <div className="mx-auto max-w-3xl space-y-5">
       <div className="card relative overflow-hidden p-6 text-center sm:p-8">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-brand-50 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-brand-50/70 to-transparent" />
         <p className="relative font-medium text-slate-500">{(attempt.tests as unknown as { title: string } | null)?.title}</p>
         <div
           className="relative mx-auto my-5 flex h-40 w-40 items-center justify-center rounded-full"
-          style={{ background: `conic-gradient(${pct >= 70 ? "#229766" : pct >= 40 ? "#f7ad2a" : "#ef4444"} ${pct * 3.6}deg, #ebf0ec 0deg)` }}
+          style={{ background: `conic-gradient(${pct >= 70 ? "#14b886" : pct >= 40 ? "#f7ad2a" : "#ef4444"} ${pct * 3.6}deg, #ebf0ec 0deg)` }}
         >
           <div className="flex h-32 w-32 flex-col items-center justify-center rounded-full bg-white">
-            <span className="font-display text-4xl font-semibold text-slate-900">{pct}%</span>
+            <span className="font-display text-4xl font-bold text-slate-900">{pct}%</span>
             <span className="text-sm font-semibold text-slate-500">{attempt.score}/{attempt.total}</span>
           </div>
         </div>

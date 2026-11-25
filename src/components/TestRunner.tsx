@@ -71,12 +71,12 @@ export function TestRunner({ attemptId, questions, deadline }: { attemptId: stri
 
   return (
     <div className="space-y-4">
-      <div className="sticky top-16 z-20 -mx-4 border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur-xl sm:top-20 sm:mx-0 sm:rounded-3xl sm:border sm:shadow-soft">
+      <div className="sticky top-16 z-20 -mx-4 border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur-xl sm:top-20 sm:mx-0 sm:rounded-2xl sm:border sm:shadow-soft">
         <div className="flex items-center justify-between gap-3">
           <span className="text-sm text-slate-600">
             Javob berildi: <b className="text-slate-900">{answered}</b> / {questions.length}
           </span>
-          <span className={"inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 font-mono text-lg font-bold tabular-nums " + (left < 60000 ? "animate-pulse bg-red-100 text-red-700" : "bg-brand-50 text-brand-700")}>
+          <span className={"inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 font-mono text-lg font-bold tabular-nums " + (left < 60000 ? "animate-pulse bg-red-100 text-red-700" : "bg-ink-900 text-brand-400")}>
             <ClockIcon size={18} /> {String(mins).padStart(2, "0")}:{String(secs).padStart(2, "0")}
           </span>
         </div>
@@ -88,7 +88,7 @@ export function TestRunner({ attemptId, questions, deadline }: { attemptId: stri
       {questions.map((q, qi) => (
         <div key={q.id} className="card">
           <p className="mb-4 flex gap-3 font-semibold leading-relaxed text-slate-900">
-            <span className={"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold " + (answers[q.id] !== undefined ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-500")}>{qi + 1}</span>
+            <span className={"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold " + (answers[q.id] !== undefined ? "bg-ink-900 text-brand-400" : "bg-slate-100 text-slate-500")}>{qi + 1}</span>
             <span>{q.text}</span>
           </p>
           <div className="space-y-2">
@@ -102,10 +102,10 @@ export function TestRunner({ attemptId, questions, deadline }: { attemptId: stri
                   disabled={pending}
                   className={
                     "flex min-h-12 w-full items-start gap-3 rounded-2xl border px-4 py-3 text-left transition " +
-                    (active ? "border-brand-500 bg-brand-50 ring-2 ring-brand-100" : "border-slate-200 bg-white hover:border-brand-300 hover:bg-brand-50/40")
+                    (active ? "border-ink-900 bg-brand-50 ring-2 ring-brand-300/60" : "border-slate-200 bg-white hover:border-slate-400")
                   }
                 >
-                  <span className={"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold " + (active ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-600")}>
+                  <span className={"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold " + (active ? "bg-ink-900 text-brand-400" : "bg-slate-100 text-slate-600")}>
                     {LETTERS[oi]}
                   </span>
                   <span className="pt-0.5">{opt}</span>
@@ -118,7 +118,7 @@ export function TestRunner({ attemptId, questions, deadline }: { attemptId: stri
 
       {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
       <button
-        className="btn w-full py-3 text-base"
+        className="btn-accent w-full py-3 text-base"
         disabled={pending}
         onClick={() => {
           if (answered < questions.length && !confirm(`${questions.length - answered} ta savolga javob bermadingiz. Baribir yakunlaysizmi?`)) return;

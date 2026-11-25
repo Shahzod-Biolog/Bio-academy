@@ -64,16 +64,16 @@ export function LessonChat({ lessonId }: { lessonId: string }) {
 
   return (
     <section className="card flex flex-col overflow-hidden p-0">
-      <div className="flex items-center justify-between gap-3 border-b border-slate-100 bg-gradient-to-r from-teal-50 to-brand-50 px-5 py-4">
+      <div className="flex items-center justify-between gap-3 border-b border-white/5 bg-ink-900 px-5 py-4 text-white">
         <div className="flex items-center gap-3">
-          <span className="icon-bubble h-10 w-10 rounded-xl bg-gradient-to-br from-teal-400 to-brand-600 text-white shadow-soft"><SparkIcon size={20} /></span>
+          <span className="icon-bubble h-10 w-10 bg-brand-400 text-ink-950"><SparkIcon size={20} /></span>
           <div>
-            <h2 className="font-display text-lg font-semibold leading-tight">AI yordamchi</h2>
-            <p className="text-xs text-slate-500">Dars bo&apos;yicha tushunmagan savolingizni bering</p>
+            <h2 className="font-display text-lg font-bold leading-tight text-white">AI yordamchi</h2>
+            <p className="text-xs text-slate-400">Dars bo&apos;yicha tushunmagan savolingizni bering</p>
           </div>
         </div>
         {messages.length > 0 && (
-          <button onClick={() => setMessages([])} className="rounded-full px-3 py-1 text-xs font-semibold text-slate-500 hover:bg-white hover:text-slate-700" disabled={loading}>
+          <button onClick={() => setMessages([])} className="rounded-full px-3 py-1 text-xs font-semibold text-slate-400 hover:bg-white/10 hover:text-white" disabled={loading}>
             Tozalash
           </button>
         )}
@@ -83,7 +83,7 @@ export function LessonChat({ lessonId }: { lessonId: string }) {
         {messages.length === 0 && (
           <div className="flex flex-wrap gap-2">
             {SUGGESTIONS.map((s) => (
-              <button key={s} onClick={() => send(s)} className="rounded-full border border-brand-200 bg-white px-4 py-2 text-sm font-medium text-brand-700 transition hover:border-brand-500 hover:bg-brand-50">
+              <button key={s} onClick={() => send(s)} className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-ink-900 hover:text-ink-900">
                 {s}
               </button>
             ))}
@@ -93,8 +93,8 @@ export function LessonChat({ lessonId }: { lessonId: string }) {
           <div key={i} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
             <div
               className={
-                "max-w-[85%] whitespace-pre-wrap rounded-3xl px-4 py-2.5 text-[15px] leading-6 " +
-                (m.role === "user" ? "rounded-br-lg bg-brand-600 text-white" : "rounded-bl-lg bg-slate-100 text-slate-800")
+                "max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-[15px] leading-6 " +
+                (m.role === "user" ? "rounded-br-md bg-ink-900 text-white" : "rounded-bl-md bg-brand-50 text-slate-800 ring-1 ring-brand-100")
               }
             >
               {m.content || <span className="animate-pulse text-slate-400">Yozmoqda...</span>}

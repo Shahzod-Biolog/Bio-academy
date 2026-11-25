@@ -227,9 +227,9 @@ export function topicTheme(title: string, index = 0): { Icon: (p: IconProps) => 
   return { Icon: fb.Icon, tone: fb.tone };
 }
 
-export const TONE_CLASSES: Record<Tone, { bubble: string; cover: string; text: string }> = {
-  leaf: { bubble: "bg-brand-100 text-brand-700", cover: "from-brand-500 to-brand-800", text: "text-brand-700" },
-  teal: { bubble: "bg-teal-100 text-teal-600", cover: "from-teal-400 to-brand-700", text: "text-teal-600" },
-  sun: { bubble: "bg-sun-100 text-sun-700", cover: "from-sun-300 to-brand-600", text: "text-sun-700" },
-  rose: { bubble: "bg-rose-100 text-rose-600", cover: "from-rose-300 to-teal-600", text: "text-rose-600" },
+export const TONE_CLASSES: Record<Tone, { bubble: string; glow: string; accent: string; text: string }> = {
+  leaf: { bubble: "bg-brand-100 text-brand-800", glow: "bg-brand-400/30", accent: "text-brand-400", text: "text-brand-700" },
+  teal: { bubble: "bg-teal-100 text-teal-600", glow: "bg-teal-400/30", accent: "text-teal-400", text: "text-teal-600" },
+  sun: { bubble: "bg-sun-100 text-sun-700", glow: "bg-sun-400/25", accent: "text-sun-300", text: "text-sun-700" },
+  rose: { bubble: "bg-rose-100 text-rose-600", glow: "bg-rose-400/25", accent: "text-rose-300", text: "text-rose-600" },
 };

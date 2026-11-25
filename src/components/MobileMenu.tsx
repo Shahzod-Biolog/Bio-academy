@@ -13,17 +13,17 @@ export function MobileMenu({ links }: { links: NavItem[] }) {
         aria-label="Menyu"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-100"
+        className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:bg-white/10"
       >
         {open ? <XIcon size={22} /> : <MenuIcon size={22} />}
       </button>
       {open && (
         <>
-          <div className="fixed inset-0 top-16 z-20 bg-slate-900/20 backdrop-blur-[2px]" onClick={() => setOpen(false)} />
-          <div className="absolute inset-x-3 top-[4.5rem] z-30 space-y-1 rounded-3xl border border-slate-200 bg-white p-3 shadow-lift">
+          <div className="fixed inset-0 top-16 z-20 bg-ink-950/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute inset-x-3 top-[4.5rem] z-30 space-y-1 rounded-2xl border border-white/10 bg-ink-900 p-3 shadow-lift">
             <NavLinks links={links} vertical onNavigate={() => setOpen(false)} />
-            <form action={signOut} className="border-t border-slate-100 pt-1">
-              <button className="flex w-full items-center gap-2 rounded-full px-4 py-3 text-left text-base font-semibold text-slate-500 hover:bg-slate-100">
+            <form action={signOut} className="border-t border-white/10 pt-1">
+              <button className="flex w-full items-center gap-2 rounded-xl px-4 py-3 text-left text-base font-semibold text-slate-400 hover:bg-white/5">
                 <LogoutIcon size={20} /> Chiqish
               </button>
             </form>

@@ -7,19 +7,27 @@
  */
 @theme {
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-heading), ui-serif, Georgia, serif;
+  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 
-  --color-brand-50: #effaf4;
-  --color-brand-100: #d7f2e3;
-  --color-brand-200: #b0e3c9;
-  --color-brand-300: #7dcda8;
-  --color-brand-400: #48b284;
-  --color-brand-500: #229766;
-  --color-brand-600: #167a52;
-  --color-brand-700: #126244;
-  --color-brand-800: #114e38;
-  --color-brand-900: #0e3f2e;
-  --color-brand-950: #06241a;
+  /* Asosiy rang: zumrad va yalpiz */
+  --color-brand-50: #ecfdf6;
+  --color-brand-100: #d1fae9;
+  --color-brand-200: #a5f2d3;
+  --color-brand-300: #6ee7be;
+  --color-brand-400: #3ddc97;
+  --color-brand-500: #14b886;
+  --color-brand-600: #0e9a70;
+  --color-brand-700: #0b7a5a;
+  --color-brand-800: #0b5f48;
+  --color-brand-900: #0b4d3a;
+  --color-brand-950: #052a20;
+
+  /* To'q "siyoh" ranglari: sarlavha bloklari va menyu uchun */
+  --color-ink-950: #050f0b;
+  --color-ink-900: #0a1a14;
+  --color-ink-800: #10261e;
+  --color-ink-700: #183329;
+  --color-ink-600: #24463a;
 
   --color-teal-50: #ecfbfa;
   --color-teal-100: #cff4f1;
@@ -34,104 +42,150 @@
   --color-sun-600: #c46f06;
   --color-sun-700: #9c5208;
 
-  /* Yashil tusli neytral ranglar — butun saytdagi "slate" shu bilan almashadi */
-  --color-slate-50: #f5f8f5;
-  --color-slate-100: #ebf0ec;
-  --color-slate-200: #dbe3dd;
-  --color-slate-300: #c1ccc4;
-  --color-slate-400: #91a197;
-  --color-slate-500: #65766b;
-  --color-slate-600: #4b5a50;
-  --color-slate-700: #38453d;
-  --color-slate-800: #243029;
-  --color-slate-900: #17201a;
+  /* Neytral kul ranglar (ozgina yashil tusli) */
+  --color-slate-50: #f4f7f5;
+  --color-slate-100: #e9eeeb;
+  --color-slate-200: #d9e1dc;
+  --color-slate-300: #bcc8c1;
+  --color-slate-400: #8c9c93;
+  --color-slate-500: #617168;
+  --color-slate-600: #47564d;
+  --color-slate-700: #34423a;
+  --color-slate-800: #212d27;
+  --color-slate-900: #121b16;
 
-  --shadow-soft: 0 1px 2px rgb(14 63 46 / 0.04), 0 8px 24px -12px rgb(14 63 46 / 0.14);
-  --shadow-lift: 0 2px 4px rgb(14 63 46 / 0.05), 0 18px 40px -16px rgb(14 63 46 / 0.28);
-
-  --animate-float: float 7s ease-in-out infinite;
-  --animate-spin-slow: spin 40s linear infinite;
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
+  --shadow-soft: 0 1px 2px rgb(5 15 11 / 0.04), 0 6px 20px -10px rgb(5 15 11 / 0.12);
+  --shadow-lift: 0 2px 6px rgb(5 15 11 / 0.06), 0 24px 48px -20px rgb(5 15 11 / 0.35);
+  --shadow-glow: 0 0 0 1px rgb(61 220 151 / 0.35), 0 10px 30px -8px rgb(61 220 151 / 0.5);
 }
 
 @layer base {
-html {
-  -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  @apply min-h-dvh bg-slate-50 font-sans text-slate-800 antialiased;
-  background-image:
-    radial-gradient(60rem 40rem at 110% -10%, rgb(43 191 179 / 0.10), transparent 60%),
-    radial-gradient(50rem 36rem at -15% 10%, rgb(72 178 132 / 0.12), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='96' viewBox='0 0 84 96'%3E%3Cg fill='none' stroke='%23126244' stroke-opacity='0.05' stroke-width='1.2'%3E%3Cpath d='M42 4l34 20v40L42 84 8 64V24z'/%3E%3Ccircle cx='42' cy='4' r='2.5'/%3E%3Ccircle cx='76' cy='64' r='2.5'/%3E%3Ccircle cx='8' cy='64' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
-  background-attachment: fixed;
-}
-
-h1, h2, h3 {
-  @apply text-slate-900;
-}
-
-::selection {
-  @apply bg-brand-200 text-brand-950;
-}
-
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply min-h-dvh bg-slate-50 font-sans text-slate-800 antialiased;
+    background-image:
+      radial-gradient(70rem 28rem at 50% -14rem, rgb(61 220 151 / 0.12), transparent 70%),
+      linear-gradient(rgb(5 15 11 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(5 15 11 / 0.035) 1px, transparent 1px);
+    background-size: auto, 32px 32px, 32px 32px;
+    background-attachment: fixed;
+  }
+  h1, h2, h3 {
+    @apply font-display tracking-tight text-slate-900;
+  }
+  ::selection {
+    @apply bg-brand-300 text-ink-950;
+  }
 }
 
 @layer components {
 /* ---------- Asosiy bloklar ---------- */
 
 .card {
-  @apply rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-soft backdrop-blur-sm;
+  @apply rounded-2xl border border-slate-200 bg-white p-5 shadow-soft;
 }
 .card-hover {
-  @apply transition duration-200 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-lift;
+  @apply transition duration-200 hover:-translate-y-1 hover:border-brand-400 hover:shadow-lift;
 }
 
 .btn {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_-6px_rgb(22_122_82/0.6)] transition hover:bg-brand-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-ink-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ink-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
 }
 .btn-outline {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/80 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:bg-brand-50 hover:text-brand-800 active:scale-[0.98];
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:bg-brand-50 hover:text-brand-800 active:scale-[0.98];
 }
 .btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
 }
 .btn-danger {
   @apply inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm font-medium text-red-600 transition hover:bg-red-50;
 }
 
 .input {
-  @apply min-h-11 w-full rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-[15px] text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100;
+  @apply min-h-11 w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-[15px] text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-ink-900 focus:ring-4 focus:ring-brand-200/60;
 }
 .label {
   @apply mb-1.5 block text-sm font-semibold text-slate-700;
 }
 
 .eyebrow {
-  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-brand-600;
+  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-700;
 }
 .page-title {
-  @apply font-display text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl;
+  @apply font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl;
 }
 .section-title {
-  @apply flex items-center gap-2.5 font-display text-xl font-semibold text-slate-900;
+  @apply flex items-center gap-2.5 font-display text-xl font-bold text-slate-900;
 }
 .back-link {
   @apply inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-brand-700;
 }
 .chip {
-  @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+  @apply inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold;
 }
 .icon-bubble {
-  @apply flex shrink-0 items-center justify-center rounded-2xl;
+  @apply flex shrink-0 items-center justify-center rounded-xl;
 }
 
 .prose-notes {
   @apply whitespace-pre-wrap text-[16px] leading-8 text-slate-700;
+}
+
+.btn-accent {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-400 px-5 py-2.5 text-sm font-bold text-ink-950 transition hover:bg-brand-300 hover:shadow-glow active:scale-[0.98] disabled:opacity-50;
+}
+.panel-dark {
+  @apply relative overflow-hidden rounded-3xl bg-ink-900 text-white;
+}
+.panel-dark h1, .panel-dark h2, .panel-dark h3 {
+  @apply text-white;
+}
+.text-gradient {
+  @apply bg-gradient-to-r from-brand-300 via-brand-400 to-teal-400 bg-clip-text text-transparent;
+}
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---------- DNK animatsiyasi ---------- */
+.helix {
+  @apply flex flex-col items-center gap-[6px];
+  --amp: 64px;
+  --period: 4.8s;
+}
+.helix-rung {
+  @apply relative h-[10px] w-[calc(var(--amp)*2+12px)];
+}
+.helix-bond {
+  @apply absolute inset-x-[6px] top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-brand-400/70 via-white/25 to-teal-400/70;
+  animation: helix-bond var(--period) ease-in-out infinite;
+  animation-delay: var(--d);
+}
+.helix-dot {
+  @apply absolute left-1/2 top-1/2 -ml-[5px] -mt-[5px] h-[10px] w-[10px] rounded-full;
+  animation: helix-a calc(var(--period) / 2) ease-in-out infinite alternate;
+  animation-delay: var(--d);
+}
+.helix-dot-a {
+  @apply bg-brand-400 shadow-[0_0_12px_rgb(61_220_151/0.8)];
+}
+.helix-dot-b {
+  @apply bg-teal-400/80;
+  animation-name: helix-b;
+}
+@keyframes helix-a {
+  from { transform: translateX(calc(var(--amp) * -1)) scale(0.75); }
+  to { transform: translateX(var(--amp)) scale(1.15); }
+}
+@keyframes helix-b {
+  from { transform: translateX(var(--amp)) scale(1.15); }
+  to { transform: translateX(calc(var(--amp) * -1)) scale(0.75); }
+}
+@keyframes helix-bond {
+  0%, 50%, 100% { transform: translateY(-50%) scaleX(1); opacity: 0.9; }
+  25%, 75% { transform: translateY(-50%) scaleX(0.02); opacity: 0.2; }
 }
 
 details > summary {
@@ -148,4 +202,9 @@ details > summary::-webkit-details-marker {
     animation: none !important;
     transition: none !important;
   }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
