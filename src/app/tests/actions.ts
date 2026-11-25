@@ -5,8 +5,12 @@ import { createClient } from "@/lib/supabase/server";
 
 export async function startTest(formData: FormData) {
   const testId = String(formData.get("test_id"));
+  const count = parseInt(String(formData.get("count") ?? ""), 10);
   const supabase = await createClient();
-  const { data, error } = await supabase.rpc("start_test", { p_test_id: testId });
+  const { data, error } = await supabase.rpc("start_test", {
+    p_test_id: testId,
+    p_count: Number.isFinite(count) && count > 0 ? count : null,
+  });
   if (error || !data) throw new Error("Testni boshlab bo'lmadi");
   redirect(`/tests/${testId}?attempt=${data}`);
 }

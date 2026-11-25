@@ -110,6 +110,9 @@ create table if not exists public.test_attempts (
   total int
 );
 create index if not exists test_attempts_user_idx on public.test_attempts (user_id, started_at desc);
+-- O'quvchi tanlagan savollar (null = testdagi barcha savollar) va shu urinish uchun vaqt
+alter table public.test_attempts add column if not exists question_ids uuid[];
+alter table public.test_attempts add column if not exists time_limit_minutes int;
 
 -- ---------- Jonli darslar ----------
 create table if not exists public.live_sessions (
@@ -190,8 +193,12 @@ create policy "ai_messages insert own" on public.ai_messages
 -- Test funksiyalari: vaqtni va baholashni server nazorat qiladi
 -- =====================================================================
 
--- Testni boshlash: yangi urinish yaratadi (yoki tugallanmagan urinishni qaytaradi)
-create or replace function public.start_test(p_test_id uuid)
+-- Testni boshlash: yangi urinish yaratadi (yoki tugallanmagan urinishni qaytaradi).
+-- p_count: o'quvchi nechta savol yechmoqchi (null yoki 0 = barchasi).
+-- Savollar testdagi savollar ichidan tasodifiy tanlanadi, vaqt esa savollar soniga
+-- mos ravishda kamaytiriladi (masalan 100 savol 60 daqiqa bo'lsa, 30 savolga 18 daqiqa).
+drop function if exists public.start_test(uuid);
+create or replace function public.start_test(p_test_id uuid, p_count int default null)
 returns uuid
 language plpgsql
 security definer set search_path = public
@@ -199,6 +206,9 @@ as $$
 declare
   v_attempt uuid;
   v_limit int;
+  v_pool int;
+  v_ids uuid[];
+  v_minutes int;
 begin
   if auth.uid() is null then
     raise exception 'not authenticated';
@@ -208,15 +218,28 @@ begin
     raise exception 'test not found';
   end if;
 
-  select id into v_attempt from test_attempts
-  where user_id = auth.uid() and test_id = p_test_id and finished_at is null
-    and started_at + make_interval(mins => v_limit) > now()
-  order by started_at desc limit 1;
-
-  if v_attempt is null then
-    insert into test_attempts (user_id, test_id) values (auth.uid(), p_test_id)
-    returning id into v_attempt;
+  select a.id into v_attempt from test_attempts a
+  where a.user_id = auth.uid() and a.test_id = p_test_id and a.finished_at is null
+    and a.started_at + make_interval(mins => coalesce(a.time_limit_minutes, v_limit)) > now()
+  order by a.started_at desc limit 1;
+  if v_attempt is not null then
+    return v_attempt;
   end if;
+
+  select count(*) into v_pool from questions where test_id = p_test_id;
+
+  if p_count is null or p_count <= 0 or p_count >= v_pool then
+    v_ids := null;
+    v_minutes := v_limit;
+  else
+    select array_agg(id order by position) into v_ids
+    from (select id, position from questions where test_id = p_test_id order by random() limit p_count) s;
+    v_minutes := greatest(1, ceil(v_limit::numeric * p_count / v_pool)::int);
+  end if;
+
+  insert into test_attempts (user_id, test_id, question_ids, time_limit_minutes)
+  values (auth.uid(), p_test_id, v_ids, v_minutes)
+  returning id into v_attempt;
   return v_attempt;
 end;
 $$;
@@ -244,7 +267,8 @@ begin
     raise exception 'attempt already submitted';
   end if;
 
-  select time_limit_minutes into v_limit from tests where id = v_attempt.test_id;
+  select coalesce(v_attempt.time_limit_minutes, time_limit_minutes) into v_limit
+  from tests where id = v_attempt.test_id;
   -- 1 daqiqa internet kechikishi uchun zaxira
   v_late := now() > v_attempt.started_at + make_interval(mins => v_limit + 1);
 
@@ -252,6 +276,7 @@ begin
     select q.id, k.correct_index from questions q
     join question_keys k on k.question_id = q.id
     where q.test_id = v_attempt.test_id
+      and (v_attempt.question_ids is null or q.id = any (v_attempt.question_ids))
   loop
     v_total := v_total + 1;
     if not v_late and (p_answers ->> r.id::text) is not null
@@ -281,13 +306,14 @@ as $$
   join question_keys k on k.question_id = q.id
   where a.id = p_attempt_id
     and a.finished_at is not null
+    and (a.question_ids is null or q.id = any (a.question_ids))
     and (a.user_id = auth.uid() or public.is_admin());
 $$;
 
-revoke all on function public.start_test(uuid) from public, anon;
+revoke all on function public.start_test(uuid, int) from public, anon;
 revoke all on function public.submit_test(uuid, jsonb) from public, anon;
 revoke all on function public.attempt_review(uuid) from public, anon;
-grant execute on function public.start_test(uuid) to authenticated;
+grant execute on function public.start_test(uuid, int) to authenticated;
 grant execute on function public.submit_test(uuid, jsonb) to authenticated;
 grant execute on function public.attempt_review(uuid) to authenticated;
 
