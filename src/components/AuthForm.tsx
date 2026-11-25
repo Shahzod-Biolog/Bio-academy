@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { signIn, signUp } from "@/app/auth/actions";
-import { HelixAnimation, LabGrid, LogoMark } from "./Illustrations";
+import { Fern, LogoMark } from "./Illustrations";
 import { CheckIcon } from "./Icons";
 
 const PERKS = ["Video va jonli darslar", "Har dars uchun AI yordamchi", "Vaqtli testlar va natijalar"];
@@ -14,26 +14,24 @@ export function AuthForm({ mode, next }: { mode: "login" | "signup"; next?: stri
 
   return (
     <div className="mx-auto grid max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lift lg:grid-cols-2">
-      <div className="relative hidden overflow-hidden bg-ink-900 p-10 text-white lg:block">
-        <LabGrid className="absolute inset-0 h-full w-full" />
-        <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-brand-400/20 blur-3xl" />
-        <h2 className="relative text-4xl font-bold leading-tight text-white">
-          Biologiya — <span className="text-gradient">hayotning tili</span>
+      <div className="relative hidden overflow-hidden border-r border-ink-900 bg-brand-200 p-10 lg:block">
+        <h2 className="relative font-display text-5xl font-normal leading-none text-ink-900">
+          Biologiya — <em className="text-clay-500">hayotning tili</em>
         </h2>
         <ul className="relative mt-6 space-y-3">
           {PERKS.map((p) => (
-            <li key={p} className="flex items-center gap-3 text-slate-300">
-              <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-400 text-ink-950"><CheckIcon size={14} /></span>
+            <li key={p} className="flex items-center gap-3 font-semibold text-ink-800">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-900 text-slate-50"><CheckIcon size={14} /></span>
               {p}
             </li>
           ))}
         </ul>
-        <HelixAnimation rungs={14} className="absolute bottom-10 right-16 rotate-[25deg] opacity-90" />
+        <Fern className="absolute -bottom-24 -right-16 h-[80%] w-[110%] max-w-none" />
       </div>
 
       <div className="p-6 sm:p-10">
         <LogoMark size={44} />
-        <h1 className="mt-5 text-3xl font-bold sm:text-4xl">{isLogin ? "Xush kelibsiz!" : "Hisob yarating"}</h1>
+        <h1 className="mt-5 font-display text-4xl font-normal sm:text-5xl">{isLogin ? "Xush kelibsiz!" : "Hisob yarating"}</h1>
         <p className="mb-7 mt-1 text-slate-500">
           {isLogin ? "Darslaringizni davom ettirish uchun tizimga kiring" : "Bepul ro'yxatdan o'ting va o'qishni boshlang"}
         </p>

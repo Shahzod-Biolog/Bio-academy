@@ -7,56 +7,64 @@
  */
 @theme {
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), ui-serif, Georgia, serif;
 
-  /* Asosiy rang: zumrad va yalpiz */
-  --color-brand-50: #ecfdf6;
-  --color-brand-100: #d1fae9;
-  --color-brand-200: #a5f2d3;
-  --color-brand-300: #6ee7be;
-  --color-brand-400: #3ddc97;
-  --color-brand-500: #14b886;
-  --color-brand-600: #0e9a70;
-  --color-brand-700: #0b7a5a;
-  --color-brand-800: #0b5f48;
-  --color-brand-900: #0b4d3a;
-  --color-brand-950: #052a20;
+  /* Jurnal uslubi: o'rmon yashili, adaçayı (sage), terrakota, xantal va krem qog'oz */
+  --color-brand-50: #eef3ea;
+  --color-brand-100: #dfe8d7;
+  --color-brand-200: #cfdcc4;
+  --color-brand-300: #b2c8a4;
+  --color-brand-400: #9fc49a;
+  --color-brand-500: #5d8a68;
+  --color-brand-600: #3f6e4f;
+  --color-brand-700: #2f5b44;
+  --color-brand-800: #244836;
+  --color-brand-900: #1b3729;
+  --color-brand-950: #10241a;
 
-  /* To'q "siyoh" ranglari: sarlavha bloklari va menyu uchun */
-  --color-ink-950: #050f0b;
-  --color-ink-900: #0a1a14;
-  --color-ink-800: #10261e;
-  --color-ink-700: #183329;
-  --color-ink-600: #24463a;
+  --color-ink-950: #0d1c14;
+  --color-ink-900: #14261d;
+  --color-ink-800: #1d3428;
+  --color-ink-700: #2a4535;
+  --color-ink-600: #3a5a48;
 
-  --color-teal-50: #ecfbfa;
-  --color-teal-100: #cff4f1;
-  --color-teal-400: #2bbfb3;
-  --color-teal-500: #13a397;
-  --color-teal-600: #0c8279;
+  --color-clay-50: #fbefe9;
+  --color-clay-100: #f5d9cb;
+  --color-clay-300: #e39a78;
+  --color-clay-500: #c4572e;
+  --color-clay-600: #a9461f;
+  --color-clay-700: #8a3818;
 
-  --color-sun-50: #fff8eb;
-  --color-sun-100: #feedc7;
-  --color-sun-300: #fbc456;
-  --color-sun-400: #f7ad2a;
-  --color-sun-600: #c46f06;
-  --color-sun-700: #9c5208;
+  --color-teal-50: #ecf4f1;
+  --color-teal-100: #d3e6df;
+  --color-teal-400: #7fb3a3;
+  --color-teal-500: #4f8f7c;
+  --color-teal-600: #3b7564;
 
-  /* Neytral kul ranglar (ozgina yashil tusli) */
-  --color-slate-50: #f4f7f5;
-  --color-slate-100: #e9eeeb;
-  --color-slate-200: #d9e1dc;
-  --color-slate-300: #bcc8c1;
-  --color-slate-400: #8c9c93;
-  --color-slate-500: #617168;
-  --color-slate-600: #47564d;
-  --color-slate-700: #34423a;
-  --color-slate-800: #212d27;
-  --color-slate-900: #121b16;
+  --color-sun-50: #fcf5e4;
+  --color-sun-100: #f6e6bd;
+  --color-sun-300: #e8b64c;
+  --color-sun-400: #dca232;
+  --color-sun-600: #a8721a;
+  --color-sun-700: #85590f;
 
-  --shadow-soft: 0 1px 2px rgb(5 15 11 / 0.04), 0 6px 20px -10px rgb(5 15 11 / 0.12);
-  --shadow-lift: 0 2px 6px rgb(5 15 11 / 0.06), 0 24px 48px -20px rgb(5 15 11 / 0.35);
-  --shadow-glow: 0 0 0 1px rgb(61 220 151 / 0.35), 0 10px 30px -8px rgb(61 220 151 / 0.5);
+  /* Iliq krem neytrallar */
+  --color-slate-50: #f3eee3;
+  --color-slate-100: #ebe4d5;
+  --color-slate-200: #ddd4c1;
+  --color-slate-300: #c9bfa9;
+  --color-slate-400: #9a907b;
+  --color-slate-500: #6f6858;
+  --color-slate-600: #524c40;
+  --color-slate-700: #3d3a31;
+  --color-slate-800: #27261f;
+  --color-slate-900: #14261d;
+
+  --color-paper: #fbf8f1;
+
+  --shadow-soft: 0 1px 0 rgb(20 38 29 / 0.04);
+  --shadow-lift: 6px 6px 0 rgb(20 38 29 / 1);
+  --shadow-glow: 0 10px 30px -10px rgb(196 87 46 / 0.6);
 }
 
 @layer base {
@@ -65,127 +73,84 @@
   }
   body {
     @apply min-h-dvh bg-slate-50 font-sans text-slate-800 antialiased;
-    background-image:
-      radial-gradient(70rem 28rem at 50% -14rem, rgb(61 220 151 / 0.12), transparent 70%),
-      linear-gradient(rgb(5 15 11 / 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(5 15 11 / 0.035) 1px, transparent 1px);
-    background-size: auto, 32px 32px, 32px 32px;
-    background-attachment: fixed;
   }
   h1, h2, h3 {
     @apply font-display tracking-tight text-slate-900;
   }
   ::selection {
-    @apply bg-brand-300 text-ink-950;
+    @apply bg-sun-300 text-ink-950;
   }
 }
 
 @layer components {
-/* ---------- Asosiy bloklar ---------- */
-
 .card {
-  @apply rounded-2xl border border-slate-200 bg-white p-5 shadow-soft;
+  @apply rounded-2xl border border-ink-900/15 bg-paper p-5;
 }
 .card-hover {
-  @apply transition duration-200 hover:-translate-y-1 hover:border-brand-400 hover:shadow-lift;
+  @apply transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-ink-900 hover:shadow-lift;
 }
 
 .btn {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-ink-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ink-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-ink-900 px-6 py-2.5 text-sm font-bold text-slate-50 transition hover:bg-ink-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
 }
 .btn-outline {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:bg-brand-50 hover:text-brand-800 active:scale-[0.98];
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-ink-900 bg-transparent px-6 py-2.5 text-sm font-bold text-ink-900 transition hover:bg-ink-900 hover:text-slate-50 active:scale-[0.98];
 }
 .btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
 }
 .btn-danger {
-  @apply inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm font-medium text-red-600 transition hover:bg-red-50;
+  @apply inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm font-medium text-red-700 transition hover:bg-red-50;
+}
+.btn-accent {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-clay-500 px-6 py-2.5 text-sm font-bold text-white transition hover:bg-clay-600 hover:shadow-glow active:scale-[0.98] disabled:opacity-50;
 }
 
 .input {
-  @apply min-h-11 w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-[15px] text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-ink-900 focus:ring-4 focus:ring-brand-200/60;
+  @apply min-h-11 w-full rounded-xl border border-ink-900/25 bg-paper px-4 py-2.5 text-[15px] text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-ink-900 focus:ring-4 focus:ring-sun-300/40;
 }
 .label {
   @apply mb-1.5 block text-sm font-semibold text-slate-700;
 }
 
 .eyebrow {
-  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-700;
+  @apply inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-clay-600;
 }
 .page-title {
-  @apply font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl;
+  @apply font-display text-4xl font-normal tracking-tight text-slate-900 sm:text-6xl;
 }
 .section-title {
-  @apply flex items-center gap-2.5 font-display text-xl font-bold text-slate-900;
+  @apply flex items-center gap-2.5 font-display text-2xl font-semibold text-slate-900;
 }
 .back-link {
-  @apply inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-brand-700;
+  @apply inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 transition hover:text-clay-600;
 }
 .chip {
-  @apply inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold;
+  @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
 }
 .icon-bubble {
-  @apply flex shrink-0 items-center justify-center rounded-xl;
+  @apply flex shrink-0 items-center justify-center rounded-full;
 }
-
 .prose-notes {
-  @apply whitespace-pre-wrap text-[16px] leading-8 text-slate-700;
-}
-
-.btn-accent {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-400 px-5 py-2.5 text-sm font-bold text-ink-950 transition hover:bg-brand-300 hover:shadow-glow active:scale-[0.98] disabled:opacity-50;
+  @apply whitespace-pre-wrap text-[17px] leading-8 text-slate-700;
 }
 .panel-dark {
-  @apply relative overflow-hidden rounded-3xl bg-ink-900 text-white;
+  @apply relative overflow-hidden rounded-3xl bg-ink-900 text-slate-50;
 }
 .panel-dark h1, .panel-dark h2, .panel-dark h3 {
-  @apply text-white;
+  @apply text-slate-50;
+}
+.panel-sage {
+  @apply relative overflow-hidden rounded-3xl border border-ink-900 bg-brand-200;
 }
 .text-gradient {
-  @apply bg-gradient-to-r from-brand-300 via-brand-400 to-teal-400 bg-clip-text text-transparent;
+  @apply font-display italic text-clay-500;
 }
 .mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
-
-/* ---------- DNK animatsiyasi ---------- */
-.helix {
-  @apply flex flex-col items-center gap-[6px];
-  --amp: 64px;
-  --period: 4.8s;
-}
-.helix-rung {
-  @apply relative h-[10px] w-[calc(var(--amp)*2+12px)];
-}
-.helix-bond {
-  @apply absolute inset-x-[6px] top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-brand-400/70 via-white/25 to-teal-400/70;
-  animation: helix-bond var(--period) ease-in-out infinite;
-  animation-delay: var(--d);
-}
-.helix-dot {
-  @apply absolute left-1/2 top-1/2 -ml-[5px] -mt-[5px] h-[10px] w-[10px] rounded-full;
-  animation: helix-a calc(var(--period) / 2) ease-in-out infinite alternate;
-  animation-delay: var(--d);
-}
-.helix-dot-a {
-  @apply bg-brand-400 shadow-[0_0_12px_rgb(61_220_151/0.8)];
-}
-.helix-dot-b {
-  @apply bg-teal-400/80;
-  animation-name: helix-b;
-}
-@keyframes helix-a {
-  from { transform: translateX(calc(var(--amp) * -1)) scale(0.75); }
-  to { transform: translateX(var(--amp)) scale(1.15); }
-}
-@keyframes helix-b {
-  from { transform: translateX(var(--amp)) scale(1.15); }
-  to { transform: translateX(calc(var(--amp) * -1)) scale(0.75); }
-}
-@keyframes helix-bond {
-  0%, 50%, 100% { transform: translateY(-50%) scaleX(1); opacity: 0.9; }
-  25%, 75% { transform: translateY(-50%) scaleX(0.02); opacity: 0.2; }
+.rule {
+  @apply border-t border-ink-900;
 }
 
 details > summary {

@@ -25,18 +25,15 @@ export function NavLinks({ links, vertical = false, onNavigate }: { links: NavIt
             href={l.href}
             onClick={onNavigate}
             className={
-              "flex items-center gap-2 rounded-xl font-semibold transition " +
-              (vertical ? "px-4 py-3 text-base " : "px-3.5 py-2 text-sm ") +
+              "flex items-center gap-2 font-semibold transition " +
+              (vertical ? "px-4 py-3 text-base " : "mx-2 py-1.5 ") +
               (vertical
-                ? active
-                  ? "bg-brand-400/15 text-brand-300"
-                  : "text-slate-300 hover:bg-white/5 hover:text-white"
-                : active
-                  ? "bg-white/10 text-brand-300"
-                  : "text-slate-400 hover:bg-white/5 hover:text-white")
+                ? "rounded-xl " + (active ? "bg-brand-200 text-ink-900" : "text-ink-900 hover:bg-slate-100")
+                : "border-b-2 uppercase tracking-[0.1em] text-[13px] " +
+                  (active ? "border-clay-500 text-ink-900" : "border-transparent text-slate-600 hover:text-ink-900"))
             }
           >
-            <Icon size={vertical ? 20 : 17} />
+            {vertical && <Icon size={20} />}
             {l.label}
           </Link>
         );

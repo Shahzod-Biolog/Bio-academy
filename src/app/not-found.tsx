@@ -4,7 +4,7 @@ import { MicroscopeIcon } from "@/components/Icons";
 export default function NotFound() {
   return (
     <div className="card mx-auto max-w-md p-8 text-center">
-      <div className="icon-bubble mx-auto h-16 w-16 bg-ink-900 text-brand-400">
+      <div className="icon-bubble mx-auto h-16 w-16 bg-brand-200 text-ink-900">
         <MicroscopeIcon size={32} />
       </div>
       <h1 className="mt-4 text-2xl font-bold">Sahifa topilmadi</h1>
