@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { saveLesson } from "../../actions";
+import { BunnyUploader } from "@/components/BunnyUploader";
 
 export default async function AdminLesson({
   params,
@@ -45,7 +46,7 @@ export default async function AdminLesson({
           <div className="grid gap-3 sm:grid-cols-[12rem_1fr]">
             <div>
               <label className="label">Qayerda joylangan</label>
-              <select name="video_provider" className="input" defaultValue={lesson?.video_provider ?? "bunny"}>
+              <select id="video_provider" name="video_provider" className="input" defaultValue={lesson?.video_provider ?? "bunny"}>
                 <option value="bunny">Bunny Stream</option>
                 <option value="youtube">YouTube</option>
                 <option value="none">Videosiz</option>
@@ -53,11 +54,14 @@ export default async function AdminLesson({
             </div>
             <div>
               <label className="label">Video ID yoki havola</label>
-              <input name="video_ref" className="input" defaultValue={lesson?.video_ref} placeholder="Bunny: Video ID (GUID) · YouTube: havola" />
+              <input id="video_ref" name="video_ref" className="input" defaultValue={lesson?.video_ref} placeholder="Bunny: Video ID (GUID) · YouTube: havola" />
             </div>
           </div>
+          <div className="mt-3">
+            <BunnyUploader refInputId="video_ref" providerSelectId="video_provider" />
+          </div>
           <p className="mt-2 text-xs text-slate-500">
-            Bunny Stream: videoni bunny.net → Stream → kutubxonangizga yuklang, so&apos;ng video ustiga bosib &quot;Video ID&quot; ni nusxalang.
+            Bunny Stream: yuqoridan videoni tanlang — u avtomatik yuklanadi va Video ID o&apos;zi yoziladi. Yoki bunny.net&apos;da yuklab, Video ID ni qo&apos;lda joylang.
             YouTube: videoni &quot;Unlisted&quot; (ro&apos;yxatda yo&apos;q) qilib yuklang va havolasini joylang.
           </p>
         </fieldset>
