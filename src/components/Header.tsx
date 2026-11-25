@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/app/auth/actions";
+import { LogoMark } from "./Illustrations";
+import { LogoutIcon } from "./Icons";
 import { MobileMenu } from "./MobileMenu";
+import { NavLinks, type NavItem } from "./NavLinks";
 
 export async function Header() {
   const supabase = await createClient();
@@ -14,48 +17,44 @@ export async function Header() {
     isAdmin = data?.role === "admin";
   }
 
-  const links = user
+  const links: NavItem[] = user
     ? [
-        { href: "/dashboard", label: "Kabinet" },
-        { href: "/courses", label: "Kurslar" },
-        { href: "/live", label: "Jonli darslar" },
-        { href: "/results", label: "Natijalarim" },
-        ...(isAdmin ? [{ href: "/admin", label: "Admin" }] : []),
+        { href: "/dashboard", label: "Kabinet", icon: "home" },
+        { href: "/courses", label: "Kurslar", icon: "book" },
+        { href: "/live", label: "Jonli darslar", icon: "live" },
+        { href: "/results", label: "Natijalarim", icon: "chart" },
+        ...(isAdmin ? [{ href: "/admin", label: "Admin", icon: "shield" as const }] : []),
       ]
     : [];
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-2 font-bold text-brand-700">
-          <span className="text-2xl">🧬</span>
-          <span className="text-lg">Bio Academy</span>
+    <header className="sticky top-0 z-30 border-b border-white/5 bg-ink-950 text-white">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-2.5">
+          <LogoMark size={34} inverted />
+          <span className="font-display text-xl font-bold tracking-tight text-white">
+            Bio<span className="text-brand-400">Academy</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
-          {links.map((l) => (
-            <Link key={l.href} href={l.href} className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900">
-              {l.label}
-            </Link>
-          ))}
+          <NavLinks links={links} />
           {user ? (
             <form action={signOut}>
-              <button className="ml-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100">Chiqish</button>
+              <button className="ml-1 inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-semibold text-slate-400 transition hover:bg-white/10 hover:text-white" title="Chiqish">
+                <LogoutIcon size={18} /> <span className="sr-only lg:not-sr-only">Chiqish</span>
+              </button>
             </form>
           ) : (
             <>
-              <Link href="/login" className="btn-outline">Kirish</Link>
-              <Link href="/signup" className="btn ml-2">Ro&apos;yxatdan o&apos;tish</Link>
+              <Link href="/login" className="rounded-xl px-4 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/10 hover:text-white">Kirish</Link>
+              <Link href="/signup" className="btn-accent ml-1">Ro&apos;yxatdan o&apos;tish</Link>
             </>
           )}
         </nav>
 
         <div className="md:hidden">
-          {user ? (
-            <MobileMenu links={links} />
-          ) : (
-            <Link href="/login" className="btn">Kirish</Link>
-          )}
+          {user ? <MobileMenu links={links} /> : <Link href="/login" className="btn-accent">Kirish</Link>}
         </div>
       </div>
     </header>

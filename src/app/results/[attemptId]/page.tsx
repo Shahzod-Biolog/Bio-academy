@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/auth";
+import { CheckIcon, LightbulbIcon, XIcon } from "@/components/Icons";
 
 const LETTERS = ["A", "B", "C", "D", "E", "F"];
 
@@ -26,11 +27,20 @@ export default async function ResultPage({ params }: { params: Promise<{ attempt
 
   return (
     <div className="mx-auto max-w-3xl space-y-5">
-      <div className="card p-6 text-center">
-        <p className="text-slate-500">{(attempt.tests as unknown as { title: string } | null)?.title}</p>
-        <p className="my-2 text-5xl font-extrabold text-brand-700">{attempt.score}/{attempt.total}</p>
-        <p className="text-lg font-semibold">{pct}% {pct >= 70 ? "— Ajoyib! 🎉" : pct >= 40 ? "— Yaxshi, yana mashq qiling 💪" : "— Mavzuni qayta ko'rib chiqing 📚"}</p>
-        <Link href={`/tests/${attempt.test_id}`} className="btn-outline mt-4">Qayta topshirish</Link>
+      <div className="card relative overflow-hidden p-6 text-center sm:p-8">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-brand-50/70 to-transparent" />
+        <p className="relative font-medium text-slate-500">{(attempt.tests as unknown as { title: string } | null)?.title}</p>
+        <div
+          className="relative mx-auto my-5 flex h-40 w-40 items-center justify-center rounded-full"
+          style={{ background: `conic-gradient(${pct >= 70 ? "#14b886" : pct >= 40 ? "#f7ad2a" : "#ef4444"} ${pct * 3.6}deg, #ebf0ec 0deg)` }}
+        >
+          <div className="flex h-32 w-32 flex-col items-center justify-center rounded-full bg-white">
+            <span className="font-display text-4xl font-bold text-slate-900">{pct}%</span>
+            <span className="text-sm font-semibold text-slate-500">{attempt.score}/{attempt.total}</span>
+          </div>
+        </div>
+        <p className="relative text-lg font-semibold text-slate-800">{pct >= 70 ? "Ajoyib natija! 🎉" : pct >= 40 ? "Yaxshi, yana mashq qiling 💪" : "Mavzuni qayta ko'rib chiqing 📚"}</p>
+        <Link href={`/tests/${attempt.test_id}`} className="btn-outline relative mt-5">Qayta topshirish</Link>
       </div>
 
       {questions?.map((q, qi) => {
@@ -38,8 +48,13 @@ export default async function ResultPage({ params }: { params: Promise<{ attempt
         const chosen = answers[q.id];
         const correct = key && chosen === key.correct_index;
         return (
-          <div key={q.id} className={"card border-l-4 " + (correct ? "border-l-brand-500" : "border-l-red-400")}>
-            <p className="mb-3 font-semibold">{qi + 1}. {q.text}</p>
+          <div key={q.id} className="card">
+            <p className="mb-4 flex gap-3 font-semibold leading-relaxed text-slate-900">
+              <span className={"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white " + (correct ? "bg-brand-500" : "bg-red-400")}>
+                {correct ? <CheckIcon size={15} /> : <XIcon size={15} />}
+              </span>
+              <span>{qi + 1}. {q.text}</span>
+            </p>
             <ul className="space-y-1.5">
               {(q.options as string[]).map((opt, oi) => {
                 const isCorrect = key?.correct_index === oi;
@@ -48,8 +63,8 @@ export default async function ResultPage({ params }: { params: Promise<{ attempt
                   <li
                     key={oi}
                     className={
-                      "rounded-lg px-3 py-2 text-sm " +
-                      (isCorrect ? "bg-brand-50 font-medium text-brand-900" : isChosen ? "bg-red-50 text-red-800" : "text-slate-600")
+                      "rounded-2xl px-4 py-2.5 text-sm " +
+                      (isCorrect ? "bg-brand-50 font-medium text-brand-900 ring-1 ring-brand-200" : isChosen ? "bg-red-50 text-red-800 ring-1 ring-red-100" : "text-slate-600")
                     }
                   >
                     {LETTERS[oi]}) {opt} {isCorrect && "✓"} {isChosen && !isCorrect && "✗ (sizning javobingiz)"}
@@ -58,7 +73,7 @@ export default async function ResultPage({ params }: { params: Promise<{ attempt
               })}
             </ul>
             {chosen === undefined && <p className="mt-2 text-sm text-slate-500">Javob berilmagan</p>}
-            {key?.explanation && <p className="mt-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-600">💡 {key.explanation}</p>}
+            {key?.explanation && <p className="mt-4 flex gap-2.5 rounded-2xl bg-sun-50 p-4 text-sm leading-relaxed text-slate-700"><LightbulbIcon size={18} className="mt-0.5 shrink-0 text-sun-600" /> {key.explanation}</p>}
           </div>
         );
       })}
