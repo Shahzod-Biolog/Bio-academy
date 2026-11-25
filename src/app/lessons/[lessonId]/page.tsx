@@ -43,7 +43,7 @@ export default async function LessonPage({ params }: { params: Promise<{ lessonI
         {lesson.notes && (
           <details className="card group p-0" open>
             <summary className="flex cursor-pointer items-center gap-3 px-5 py-4">
-              <span className="icon-bubble h-10 w-10 bg-ink-900 text-brand-400"><NotesIcon size={20} /></span>
+              <span className="icon-bubble h-10 w-10 bg-panel text-brand-400"><NotesIcon size={20} /></span>
               <span className="flex-1 font-display text-lg font-bold">Dars konspekti</span>
               <ArrowRightIcon size={18} className="text-slate-400 transition group-open:rotate-90" />
             </summary>
@@ -65,13 +65,13 @@ export default async function LessonPage({ params }: { params: Promise<{ lessonI
                     href={`/lessons/${s.id}`}
                     className={
                       "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm transition " +
-                      (current ? "bg-ink-900 font-semibold text-white" : "text-slate-600 hover:bg-slate-100")
+                      (current ? "bg-panel font-semibold text-white" : "text-slate-600 hover:bg-slate-100")
                     }
                   >
                     <span
                       className={
                         "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold " +
-                        (current ? "bg-brand-400 text-ink-950" : done ? "bg-brand-100 text-brand-700" : "bg-slate-100 text-slate-500")
+                        (current ? "bg-brand-400 text-night" : done ? "bg-brand-100 text-brand-700" : "bg-slate-100 text-slate-500")
                       }
                     >
                       {current ? <PlayIcon size={14} /> : done ? <CheckIcon size={14} /> : i + 1}

@@ -34,7 +34,7 @@ export default async function ResultPage({ params }: { params: Promise<{ attempt
           className="relative mx-auto my-5 flex h-40 w-40 items-center justify-center rounded-full"
           style={{ background: `conic-gradient(${pct >= 70 ? "#14b886" : pct >= 40 ? "#f7ad2a" : "#ef4444"} ${pct * 3.6}deg, #ebf0ec 0deg)` }}
         >
-          <div className="flex h-32 w-32 flex-col items-center justify-center rounded-full bg-white">
+          <div className="flex h-32 w-32 flex-col items-center justify-center rounded-full bg-paper">
             <span className="font-display text-4xl font-bold text-slate-900">{pct}%</span>
             <span className="text-sm font-semibold text-slate-500">{attempt.score}/{attempt.total}</span>
           </div>
@@ -50,7 +50,7 @@ export default async function ResultPage({ params }: { params: Promise<{ attempt
         return (
           <div key={q.id} className="card">
             <p className="mb-4 flex gap-3 font-semibold leading-relaxed text-slate-900">
-              <span className={"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white " + (correct ? "bg-brand-500" : "bg-red-400")}>
+              <span className={"flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-night " + (correct ? "bg-brand-400" : "bg-red-400")}>
                 {correct ? <CheckIcon size={15} /> : <XIcon size={15} />}
               </span>
               <span>{qi + 1}. {q.text}</span>

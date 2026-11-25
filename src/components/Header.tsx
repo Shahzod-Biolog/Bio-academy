@@ -28,33 +28,31 @@ export async function Header() {
     : [];
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/5 bg-ink-950 text-white">
+    <header className="sticky top-0 z-30 border-b border-line bg-slate-50/80 text-slate-900 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-2.5">
-          <LogoMark size={34} inverted />
-          <span className="font-display text-xl font-bold tracking-tight text-white">
-            Bio<span className="text-brand-400">Academy</span>
-          </span>
+          <LogoMark size={34} />
+          <span className="font-display text-[22px] font-bold tracking-tight text-slate-900">Bio <span className="text-brand-400">Academy</span></span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
           <NavLinks links={links} />
           {user ? (
             <form action={signOut}>
-              <button className="ml-1 inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-semibold text-slate-400 transition hover:bg-white/10 hover:text-white" title="Chiqish">
+              <button className="ml-2 inline-flex items-center gap-2 rounded-xl border border-line px-4 py-2 text-sm font-bold text-slate-900 transition hover:border-brand-400 hover:bg-brand-400 hover:text-night" title="Chiqish">
                 <LogoutIcon size={18} /> <span className="sr-only lg:not-sr-only">Chiqish</span>
               </button>
             </form>
           ) : (
             <>
-              <Link href="/login" className="rounded-xl px-4 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/10 hover:text-white">Kirish</Link>
-              <Link href="/signup" className="btn-accent ml-1">Ro&apos;yxatdan o&apos;tish</Link>
+              <Link href="/login" className="rounded-xl px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-brand-300 transition hover:text-brand-400">Kirish</Link>
+              <Link href="/signup" className="btn ml-1">Ro&apos;yxatdan o&apos;tish</Link>
             </>
           )}
         </nav>
 
         <div className="md:hidden">
-          {user ? <MobileMenu links={links} /> : <Link href="/login" className="btn-accent">Kirish</Link>}
+          {user ? <MobileMenu links={links} /> : <Link href="/login" className="btn">Kirish</Link>}
         </div>
       </div>
     </header>

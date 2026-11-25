@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { HelixAnimation, LabGrid } from "@/components/Illustrations";
-import { ArrowRightIcon, ClipboardIcon, LiveIcon, MicroscopeIcon, PlayIcon, SparkIcon } from "@/components/Icons";
+import { Lens } from "@/components/Illustrations";
+import { ArrowRightIcon, ClipboardIcon, LiveIcon, PlayIcon, SparkIcon } from "@/components/Icons";
 
-const TOPICS = ["Botanika", "Zoologiya", "Sitologiya", "Genetika", "Anatomiya", "Ekologiya", "Evolyutsiya", "Fiziologiya"];
-
-const STEPS = [
-  { n: "01", title: "Ro'yxatdan o'ting", text: "Bir daqiqada bepul hisob oching." },
-  { n: "02", title: "Darsni ko'ring", text: "Video va konspekt bilan mavzuni o'rganing." },
-  { n: "03", title: "Savol bering", text: "AI yordamchi tushunmagan joyingizni izohlaydi." },
-  { n: "04", title: "Test yeching", text: "Bilimingizni sinab, natijangizni kuzating." },
+const FEATURES = [
+  { n: "01", Icon: PlayIcon, title: "Video darslar", text: "Har bir mavzu qisqa, tushunarli videolarga bo'lingan. Istalgan vaqtda, istalgan qurilmada ko'ring.", tag: "×100" },
+  { n: "02", Icon: LiveIcon, title: "Jonli efirlar", text: "Ustoz bilan jonli darslarda savol bering. Yozuvlari arxivda saqlanadi.", tag: "×200" },
+  { n: "03", Icon: SparkIcon, title: "AI ustoz", text: "Har dars ostida tushunmagan savolingizni bering va darhol javob oling.", tag: "×400" },
+  { n: "04", Icon: ClipboardIcon, title: "Vaqtli testlar", text: "10 tadan 50 tagacha savol tanlang, natija va izohlarni darhol ko'ring.", tag: "×1000" },
 ];
+
+const TOPICS = ["Botanika", "Zoologiya", "Sitologiya", "Genetika", "Anatomiya", "Ekologiya", "Evolyutsiya"];
 
 export default async function Home() {
   const supabase = await createClient();
@@ -21,131 +21,97 @@ export default async function Home() {
   if (user) redirect("/dashboard");
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      {/* Hero */}
-      <section className="panel-dark px-6 py-12 sm:px-12 sm:py-16">
-        <LabGrid className="absolute inset-0 h-full w-full" />
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-400/20 blur-3xl" />
-        <div className="relative grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <div>
-            <span className="mono inline-flex items-center gap-2 rounded-lg border border-brand-400/30 bg-brand-400/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-300">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-400" /> Biologiya onlayn akademiyasi
-            </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.02] sm:text-6xl lg:text-7xl">
-              Hayot kodini <br className="hidden sm:block" />
-              <span className="text-gradient">o&apos;qishni</span> o&apos;rganing.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
-              Video darslar, jonli mashg&apos;ulotlar, sun&apos;iy intellekt yordamchisi va vaqtli testlar. DTM va olimpiadaga tayyorgarlik uchun bitta platforma.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/signup" className="btn-accent px-6 py-3 text-base">
-                Bepul boshlash <ArrowRightIcon size={18} />
-              </Link>
-              <Link href="/login" className="inline-flex min-h-11 items-center rounded-xl border border-white/15 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/10">
-                Kirish
-              </Link>
-            </div>
+    <div className="-mt-6 sm:-mt-10">
+      {/* Mikroskop ostidagi muqova */}
+      <section className="relative grid items-center gap-12 py-10 sm:py-14 lg:min-h-[calc(100dvh-4rem)] lg:grid-cols-[1fr_1.05fr] lg:py-6">
+        <div className="relative z-10">
+          <p className="eyebrow"><span className="h-2 w-2 rounded-full bg-brand-400 shadow-glow" /> Namuna: DNK qo&apos;sh spirali</p>
+          <h1 className="mt-5 font-display text-[52px] font-bold leading-[0.95] tracking-[-0.03em] sm:text-7xl xl:text-[84px]">
+            Ko&apos;zga ko&apos;rinmas dunyoni <span className="text-brand-400">kashf eting</span>
+          </h1>
+          <p className="mt-6 max-w-md text-[17px] leading-relaxed text-slate-600">
+            Hujayradan DNKgacha — har bir dars yangi kashfiyot. Video, jonli efir va AI ustoz bilan biologiyani chuqur o&apos;rganing.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/signup" className="btn-accent whitespace-nowrap px-7 py-4 text-base">
+              Tadqiqotni boshlash <ArrowRightIcon size={18} />
+            </Link>
+            <Link href="/login" className="btn-outline whitespace-nowrap px-7 py-4 text-base">Kirish</Link>
           </div>
-          <div className="relative mx-auto hidden h-80 items-center justify-center sm:flex">
-            <div className="absolute inset-0 rounded-full bg-brand-400/10 blur-2xl" />
-            <HelixAnimation rungs={18} className="relative rotate-[20deg]" />
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[560px] px-8 py-10 sm:px-14">
+          <Lens className="w-full" />
+          <div className="readout absolute right-0 top-[18%] min-w-40 sm:right-2">
+            <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-brand-300">Obyekt</span>
+            <b className="mt-0.5 block font-display text-xl text-slate-900">DNK</b>
+            <span className="text-xs text-slate-500">irsiyat kaliti</span>
           </div>
+          <div className="readout absolute bottom-[12%] left-0">
+            <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-brand-300">Fanlar</span>
+            <b className="mt-0.5 block font-display text-xl text-slate-900">7 bo&apos;lim</b>
+          </div>
+          <div className="readout absolute bottom-[4%] right-[6%]">
+            <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-brand-300">AI ustoz</span>
+            <b className="mt-0.5 block font-display text-xl text-slate-900">Onlayn · 24/7</b>
+          </div>
+        </div>
+        <div className="pointer-events-none absolute bottom-4 right-0 hidden text-right font-mono text-xs text-brand-300 lg:block">
+          <div className="mb-1.5 ml-auto h-1 w-28 rounded bg-brand-400" />50 µm
         </div>
       </section>
 
       {/* Fanlar lentasi */}
-      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white py-4">
-        <div className="flex w-max animate-[marquee_30s_linear_infinite] gap-8 pr-8">
+      <section className="ml-[calc(50%-50vw)] w-screen overflow-hidden border-y border-line bg-panel py-4">
+        <div className="flex w-max animate-[marquee_35s_linear_infinite] gap-10 pr-10">
           {[...TOPICS, ...TOPICS].map((t, i) => (
-            <span key={i} className="flex items-center gap-8 font-display text-xl font-bold text-slate-300">
-              {t} <span className="h-2 w-2 rotate-45 bg-brand-400" />
+            <span key={i} className="flex items-center gap-10 font-mono text-lg uppercase tracking-[0.2em] text-brand-100">
+              {t} <span className="text-sun-300">◉</span>
             </span>
           ))}
         </div>
       </section>
 
-      {/* Bento */}
-      <section className="grid auto-rows-[minmax(11rem,auto)] gap-4 md:grid-cols-6">
-        <div className="card card-hover flex flex-col justify-between md:col-span-4">
-          <div className="flex items-start justify-between">
-            <span className="icon-bubble h-12 w-12 bg-ink-900 text-brand-400"><PlayIcon size={24} /></span>
-            <span className="mono text-xs font-semibold text-slate-400">01 / VIDEO</span>
-          </div>
+      {/* Imkoniyatlar: obyektiv kattalashtirish bosqichlari */}
+      <section className="mt-16">
+        <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h3 className="mt-6 text-2xl font-bold">Video darslar</h3>
-            <p className="mt-1 max-w-md text-slate-500">Har bir mavzu qisqa, tushunarli videolarga bo&apos;lingan. Istalgan vaqtda, istalgan qurilmada ko&apos;ring.</p>
+            <span className="eyebrow">Preparatlar</span>
+            <h2 className="mt-3 font-display text-4xl font-bold leading-none sm:text-5xl">
+              Har bir <span className="text-brand-400">kattalashtirishda</span> yangi bilim
+            </h2>
           </div>
+          <p className="max-w-xs text-slate-500">O&apos;rganish uchun kerak bo&apos;lgan hamma narsa bitta platformada.</p>
         </div>
-        <div className="panel-dark card-hover flex flex-col justify-between p-5 md:col-span-2">
-          <div className="flex items-start justify-between">
-            <span className="icon-bubble h-12 w-12 bg-brand-400 text-ink-950"><SparkIcon size={24} /></span>
-            <span className="mono text-xs font-semibold text-slate-500">02 / AI</span>
-          </div>
-          <div>
-            <h3 className="mt-6 text-2xl font-bold">AI yordamchi</h3>
-            <p className="mt-1 text-slate-400">Har dars ostida savolingizga darhol javob.</p>
-          </div>
-        </div>
-        <div className="card card-hover flex flex-col justify-between md:col-span-2">
-          <div className="flex items-start justify-between">
-            <span className="icon-bubble h-12 w-12 bg-rose-50 text-rose-600"><LiveIcon size={24} /></span>
-            <span className="mono text-xs font-semibold text-slate-400">03 / LIVE</span>
-          </div>
-          <div>
-            <h3 className="mt-6 text-2xl font-bold">Jonli darslar</h3>
-            <p className="mt-1 text-slate-500">Ustoz bilan efirda, yozuvlari arxivda.</p>
-          </div>
-        </div>
-        <div className="card card-hover relative flex flex-col justify-between overflow-hidden md:col-span-4">
-          <div className="flex items-start justify-between">
-            <span className="icon-bubble h-12 w-12 bg-sun-100 text-sun-700"><ClipboardIcon size={24} /></span>
-            <span className="mono text-xs font-semibold text-slate-400">04 / TEST</span>
-          </div>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <h3 className="mt-6 text-2xl font-bold">Vaqtli testlar</h3>
-              <p className="mt-1 max-w-md text-slate-500">10 tadan 50 tagacha savol tanlang, natija va izohlarni darhol ko&apos;ring.</p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {FEATURES.map((f) => (
+            <div key={f.n} className="card card-hover group relative overflow-hidden">
+              <div className="flex items-center justify-between font-mono text-xs text-slate-500">
+                <span>{f.n}</span>
+                <span className="text-brand-700">{f.tag}</span>
+              </div>
+              <span className="icon-bubble mt-6 h-14 w-14 border border-brand-300/30 bg-brand-100 text-brand-700 transition group-hover:bg-brand-400 group-hover:text-night">
+                <f.Icon size={26} />
+              </span>
+              <h3 className="mt-5 font-display text-2xl font-bold">{f.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-500">{f.text}</p>
             </div>
-            <div className="flex items-end gap-1.5" aria-hidden>
-              {[40, 62, 48, 78, 90].map((h, i) => (
-                <span key={i} className="w-5 rounded-t-md bg-gradient-to-t from-brand-500 to-brand-300" style={{ height: h }} />
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Qadamlar */}
-      <section className="panel-dark p-6 sm:p-10">
-        <LabGrid className="absolute inset-0 h-full w-full" />
-        <div className="relative">
-          <span className="mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-300">Qanday ishlaydi</span>
-          <h2 className="mt-2 text-3xl font-bold sm:text-4xl">To&apos;rt bosqich — bitta natija</h2>
-          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {STEPS.map((s) => (
-              <li key={s.n} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <span className="mono text-sm font-bold text-brand-400">{s.n}</span>
-                <p className="mt-3 text-lg font-bold text-white">{s.title}</p>
-                <p className="mt-1 text-sm text-slate-400">{s.text}</p>
-              </li>
-            ))}
-          </ol>
+      {/* Chaqiruv */}
+      <section className="panel-sage mt-16 grid items-center gap-8 p-8 sm:p-12 md:grid-cols-[1.4fr_1fr]">
+        <div>
+          <span className="eyebrow">Laboratoriya jurnali</span>
+          <p className="mt-4 font-display text-3xl font-bold leading-snug text-slate-900 sm:text-4xl">
+            “Biologiyani <span className="text-brand-400">yodlamang</span> — uni mikroskop ostida ko&apos;ring va tushuning.”
+          </p>
+          <Link href="/signup" className="btn mt-8 px-7 py-3.5 text-base">
+            Hisob ochish <ArrowRightIcon size={18} />
+          </Link>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section className="card flex flex-col items-center justify-between gap-6 p-8 sm:flex-row sm:p-10">
-        <div className="flex items-center gap-4">
-          <span className="icon-bubble h-14 w-14 bg-brand-100 text-brand-800"><MicroscopeIcon size={28} /></span>
-          <div>
-            <h2 className="text-2xl font-bold sm:text-3xl">Bugun boshlang</h2>
-            <p className="text-slate-500">Ro&apos;yxatdan o&apos;tish bepul va bir daqiqa vaqt oladi.</p>
-          </div>
-        </div>
-        <Link href="/signup" className="btn px-7 py-3 text-base">
-          Hisob ochish <ArrowRightIcon size={18} />
-        </Link>
+        <Lens className="mx-auto hidden w-56 md:block" hue={40} ring={false} />
       </section>
     </div>
   );

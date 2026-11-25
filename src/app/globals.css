@@ -1,191 +1,193 @@
 @import "tailwindcss";
 
 /*
- * Bio Academy dizayn tizimi.
- * Ranglar tabiatdan olingan: barg yashili (brand), dengiz moviy-yashili (teal),
- * quyosh sarig'i (sun) va yashil tusli neytral kul rang (slate o'rniga).
+ * Bio Academy dizayn tizimi — "Mikroskop ostida".
+ * Qorong'i laboratoriya foni, millimetrli to'r, yalt etuvchi yalpiz-yashil (brand),
+ * marjon (clay), oltin (sun) va okean (teal) urg'ulari. Neytrallar (slate)
+ * qorong'i fon uchun teskari: 50 = eng to'q fon, 900 = eng yorqin matn.
  */
 @theme {
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Asosiy rang: zumrad va yalpiz */
-  --color-brand-50: #ecfdf6;
-  --color-brand-100: #d1fae9;
-  --color-brand-200: #a5f2d3;
-  --color-brand-300: #6ee7be;
-  --color-brand-400: #3ddc97;
-  --color-brand-500: #14b886;
-  --color-brand-600: #0e9a70;
-  --color-brand-700: #0b7a5a;
-  --color-brand-800: #0b5f48;
-  --color-brand-900: #0b4d3a;
-  --color-brand-950: #052a20;
+  --color-night: #04130d;
+  --color-paper: #ffffff;
+  --color-panel: #0e3a2a;
+  --color-line: #c3e6d2;
 
-  /* To'q "siyoh" ranglari: sarlavha bloklari va menyu uchun */
-  --color-ink-950: #050f0b;
-  --color-ink-900: #0a1a14;
-  --color-ink-800: #10261e;
-  --color-ink-700: #183329;
-  --color-ink-600: #24463a;
+  --color-brand-50: #e8f8ef;
+  --color-brand-100: #d3f2e1;
+  --color-brand-200: #b4e9cc;
+  --color-brand-300: #0e8a56;
+  --color-brand-400: #1fbf78;
+  --color-brand-500: #15a46a;
+  --color-brand-600: #0f8a57;
+  --color-brand-700: #0c7a4c;
+  --color-brand-800: #0a6640;
+  --color-brand-900: #08502f;
+  --color-brand-950: #04130d;
 
-  --color-teal-50: #ecfbfa;
-  --color-teal-100: #cff4f1;
-  --color-teal-400: #2bbfb3;
-  --color-teal-500: #13a397;
-  --color-teal-600: #0c8279;
+  --color-clay-50: #fff1eb;
+  --color-clay-100: #ffe0d3;
+  --color-clay-300: #ffab8a;
+  --color-clay-500: #f0602f;
+  --color-clay-600: #d94f20;
+  --color-clay-700: #b13f17;
 
-  --color-sun-50: #fff8eb;
-  --color-sun-100: #feedc7;
-  --color-sun-300: #fbc456;
-  --color-sun-400: #f7ad2a;
-  --color-sun-600: #c46f06;
-  --color-sun-700: #9c5208;
+  --color-sun-50: #fff8e6;
+  --color-sun-100: #fdeec2;
+  --color-sun-300: #f2b632;
+  --color-sun-400: #e8a41c;
+  --color-sun-600: #b07a0c;
+  --color-sun-700: #8f6206;
 
-  /* Neytral kul ranglar (ozgina yashil tusli) */
-  --color-slate-50: #f4f7f5;
-  --color-slate-100: #e9eeeb;
-  --color-slate-200: #d9e1dc;
-  --color-slate-300: #bcc8c1;
-  --color-slate-400: #8c9c93;
-  --color-slate-500: #617168;
-  --color-slate-600: #47564d;
-  --color-slate-700: #34423a;
-  --color-slate-800: #212d27;
-  --color-slate-900: #121b16;
+  --color-teal-50: #e8f7f5;
+  --color-teal-100: #cdeee9;
+  --color-teal-400: #3cc0b2;
+  --color-teal-500: #23a596;
+  --color-teal-600: #178577;
 
-  --shadow-soft: 0 1px 2px rgb(5 15 11 / 0.04), 0 6px 20px -10px rgb(5 15 11 / 0.12);
-  --shadow-lift: 0 2px 6px rgb(5 15 11 / 0.06), 0 24px 48px -20px rgb(5 15 11 / 0.35);
-  --shadow-glow: 0 0 0 1px rgb(61 220 151 / 0.35), 0 10px 30px -8px rgb(61 220 151 / 0.5);
+  /* Yorqin och yashil neytrallar */
+  --color-slate-50: #e6f7ec;
+  --color-slate-100: #d8f1e2;
+  --color-slate-200: #c3e6d2;
+  --color-slate-300: #a2d3b7;
+  --color-slate-400: #6f9a85;
+  --color-slate-500: #4d7363;
+  --color-slate-600: #3b5d4e;
+  --color-slate-700: #2a483b;
+  --color-slate-800: #1a3529;
+  --color-slate-900: #0a2a1d;
+
+  --shadow-soft: 0 1px 2px rgb(10 42 29 / 0.06);
+  --shadow-lift: 0 24px 60px -24px rgb(15 138 87 / 0.35);
+  --shadow-glow: 0 10px 30px -8px rgb(31 191 120 / 0.6);
 }
 
 @layer base {
   html {
+    color-scheme: light;
     -webkit-tap-highlight-color: transparent;
   }
   body {
     @apply min-h-dvh bg-slate-50 font-sans text-slate-800 antialiased;
     background-image:
-      radial-gradient(70rem 28rem at 50% -14rem, rgb(61 220 151 / 0.12), transparent 70%),
-      linear-gradient(rgb(5 15 11 / 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(5 15 11 / 0.035) 1px, transparent 1px);
-    background-size: auto, 32px 32px, 32px 32px;
-    background-attachment: fixed;
+      radial-gradient(60rem 40rem at 85% -10%, rgb(160 240 196 / 0.7), transparent 70%),
+      radial-gradient(50rem 30rem at -10% 60%, rgb(200 250 222 / 0.8), transparent 70%),
+      linear-gradient(rgb(20 164 103 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(20 164 103 / 0.07) 1px, transparent 1px);
+    background-size: auto, auto, 40px 40px, 40px 40px;
   }
   h1, h2, h3 {
     @apply font-display tracking-tight text-slate-900;
   }
   ::selection {
-    @apply bg-brand-300 text-ink-950;
+    @apply bg-brand-400 text-night;
   }
 }
 
 @layer components {
-/* ---------- Asosiy bloklar ---------- */
-
 .card {
-  @apply rounded-2xl border border-slate-200 bg-white p-5 shadow-soft;
+  @apply rounded-2xl border border-line bg-paper/90 p-5 shadow-soft backdrop-blur-sm;
 }
 .card-hover {
-  @apply transition duration-200 hover:-translate-y-1 hover:border-brand-400 hover:shadow-lift;
+  @apply transition duration-200 hover:-translate-y-0.5 hover:border-brand-400/60 hover:shadow-glow;
 }
 
 .btn {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-ink-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ink-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-400 px-6 py-2.5 text-sm font-bold text-night transition hover:bg-brand-300 hover:shadow-glow active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+}
+.btn-accent {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-400 px-6 py-2.5 text-sm font-bold text-night shadow-glow transition hover:bg-brand-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
 }
 .btn-outline {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:bg-brand-50 hover:text-brand-800 active:scale-[0.98];
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-brand-300/40 bg-transparent px-6 py-2.5 text-sm font-bold text-slate-900 transition hover:border-brand-400 hover:text-brand-400 active:scale-[0.98];
 }
 .btn-ghost {
   @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
 }
 .btn-danger {
-  @apply inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm font-medium text-red-600 transition hover:bg-red-50;
+  @apply inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-sm font-medium text-red-700 transition hover:bg-red-50;
 }
 
 .input {
-  @apply min-h-11 w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-[15px] text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-ink-900 focus:ring-4 focus:ring-brand-200/60;
+  @apply min-h-11 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-[15px] text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-400/15;
 }
 .label {
-  @apply mb-1.5 block text-sm font-semibold text-slate-700;
+  @apply mb-1.5 block font-mono text-xs font-semibold uppercase tracking-[0.12em] text-slate-600;
 }
 
 .eyebrow {
-  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-700;
+  @apply inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-300;
 }
 .page-title {
-  @apply font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl;
+  @apply font-display text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl;
 }
 .section-title {
-  @apply flex items-center gap-2.5 font-display text-xl font-bold text-slate-900;
+  @apply flex items-center gap-2.5 font-display text-2xl font-bold text-slate-900;
 }
 .back-link {
-  @apply inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-brand-700;
+  @apply inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 transition hover:text-brand-400;
 }
 .chip {
-  @apply inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold;
+  @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
 }
 .icon-bubble {
-  @apply flex shrink-0 items-center justify-center rounded-xl;
+  @apply flex shrink-0 items-center justify-center rounded-full;
 }
-
 .prose-notes {
-  @apply whitespace-pre-wrap text-[16px] leading-8 text-slate-700;
-}
-
-.btn-accent {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-400 px-5 py-2.5 text-sm font-bold text-ink-950 transition hover:bg-brand-300 hover:shadow-glow active:scale-[0.98] disabled:opacity-50;
+  @apply whitespace-pre-wrap text-[17px] leading-8 text-slate-700;
 }
 .panel-dark {
-  @apply relative overflow-hidden rounded-3xl bg-ink-900 text-white;
+  @apply relative overflow-hidden rounded-3xl border border-line bg-panel text-slate-800;
 }
-.panel-dark h1, .panel-dark h2, .panel-dark h3 {
-  @apply text-white;
+/* Asosiy "laboratoriya" paneli (eski nomi saqlangan) */
+.panel-sage {
+  @apply relative overflow-hidden rounded-3xl border border-line bg-brand-100;
+  background-image:
+    radial-gradient(40rem 24rem at 100% 50%, rgb(255 255 255 / 0.75), transparent 70%),
+    linear-gradient(rgb(20 164 103 / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(20 164 103 / 0.08) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px;
+}
+.readout {
+  @apply rounded-xl border border-brand-300/25 bg-white/85 px-3.5 py-3 shadow-lift backdrop-blur-md;
 }
 .text-gradient {
-  @apply bg-gradient-to-r from-brand-300 via-brand-400 to-teal-400 bg-clip-text text-transparent;
+  @apply text-brand-400;
 }
 .mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  @apply font-mono;
+}
+.rule {
+  @apply border-t border-line;
 }
 
-/* ---------- DNK animatsiyasi ---------- */
-.helix {
-  @apply flex flex-col items-center gap-[6px];
-  --amp: 64px;
-  --period: 4.8s;
+/* Mikroskop linzasi */
+.lens-glass {
+  box-shadow:
+    0 0 0 10px #ffffff,
+    0 0 0 11px rgb(20 164 103 / 0.35),
+    0 0 0 28px rgb(255 255 255 / 0.55),
+    0 30px 90px 10px rgb(15 138 87 / 0.35);
 }
-.helix-rung {
-  @apply relative h-[10px] w-[calc(var(--amp)*2+12px)];
+.lens-vignette {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 58%, rgb(1 14 10 / 0.7) 100%),
+    radial-gradient(circle at 32% 26%, rgb(255 255 255 / 0.22), transparent 28%);
 }
-.helix-bond {
-  @apply absolute inset-x-[6px] top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-brand-400/70 via-white/25 to-teal-400/70;
-  animation: helix-bond var(--period) ease-in-out infinite;
-  animation-delay: var(--d);
+/* DNK preparati foni: chuqur okean-yashil, mayda "bokeh" zarrachalar bilan */
+.lens-bg {
+  background:
+    radial-gradient(circle at 20% 75%, rgb(95 212 200 / 0.35) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 20%, rgb(242 182 50 / 0.45) 0 2px, transparent 3px),
+    radial-gradient(circle at 65% 82%, rgb(255 255 255 / 0.35) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 30% 30%, rgb(61 220 151 / 0.25) 0 3px, transparent 6px),
+    radial-gradient(circle at 50% 45%, #0d5a40 0%, #063a2a 45%, #021a12 100%);
 }
-.helix-dot {
-  @apply absolute left-1/2 top-1/2 -ml-[5px] -mt-[5px] h-[10px] w-[10px] rounded-full;
-  animation: helix-a calc(var(--period) / 2) ease-in-out infinite alternate;
-  animation-delay: var(--d);
-}
-.helix-dot-a {
-  @apply bg-brand-400 shadow-[0_0_12px_rgb(61_220_151/0.8)];
-}
-.helix-dot-b {
-  @apply bg-teal-400/80;
-  animation-name: helix-b;
-}
-@keyframes helix-a {
-  from { transform: translateX(calc(var(--amp) * -1)) scale(0.75); }
-  to { transform: translateX(var(--amp)) scale(1.15); }
-}
-@keyframes helix-b {
-  from { transform: translateX(var(--amp)) scale(1.15); }
-  to { transform: translateX(calc(var(--amp) * -1)) scale(0.75); }
-}
-@keyframes helix-bond {
-  0%, 50%, 100% { transform: translateY(-50%) scaleX(1); opacity: 0.9; }
-  25%, 75% { transform: translateY(-50%) scaleX(0.02); opacity: 0.2; }
+.dna-scroll {
+  animation: dna-twist 9s linear infinite;
 }
 
 details > summary {
@@ -207,4 +209,14 @@ details > summary::-webkit-details-marker {
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+/* Spiral davriy: bir davrga surilganda aylanayotgandek ko'rinadi */
+@keyframes dna-twist {
+  from { transform: translateY(0); }
+  to { transform: translateY(-16.6667%); }
+}
+@keyframes scan {
+  0%, 100% { transform: translateY(-40%); opacity: 0; }
+  20%, 80% { opacity: 1; }
+  50% { transform: translateY(40%); }
 }
