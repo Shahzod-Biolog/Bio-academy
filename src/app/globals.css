@@ -1,129 +1,155 @@
 @import "tailwindcss";
 
 /*
- * Bio Academy dizayn tizimi.
- * Ranglar tabiatdan olingan: barg yashili (brand), dengiz moviy-yashili (teal),
- * quyosh sarig'i (sun) va yashil tusli neytral kul rang (slate o'rniga).
+ * Bio Academy dizayn tizimi — "Mikroskop ostida".
+ * Qorong'i laboratoriya foni, millimetrli to'r, yalt etuvchi yalpiz-yashil (brand),
+ * marjon (clay), oltin (sun) va okean (teal) urg'ulari. Neytrallar (slate)
+ * qorong'i fon uchun teskari: 50 = eng to'q fon, 900 = eng yorqin matn.
  */
 @theme {
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-heading), ui-serif, Georgia, serif;
+  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Jurnal uslubi: o'rmon yashili, adaçayı (sage), terrakota, xantal va krem qog'oz */
-  --color-brand-50: #eef3ea;
-  --color-brand-100: #dfe8d7;
-  --color-brand-200: #cfdcc4;
-  --color-brand-300: #b2c8a4;
-  --color-brand-400: #9fc49a;
-  --color-brand-500: #5d8a68;
-  --color-brand-600: #3f6e4f;
-  --color-brand-700: #2f5b44;
-  --color-brand-800: #244836;
-  --color-brand-900: #1b3729;
-  --color-brand-950: #10241a;
+  --color-night: #04130d;
+  --color-paper: #0a1813;
+  --color-panel: #0c1d17;
+  --color-line: #1f3a31;
 
-  --color-ink-950: #0d1c14;
-  --color-ink-900: #14261d;
-  --color-ink-800: #1d3428;
-  --color-ink-700: #2a4535;
-  --color-ink-600: #3a5a48;
+  --color-brand-50: #0b2119;
+  --color-brand-100: #0f2c21;
+  --color-brand-200: #12392b;
+  --color-brand-300: #7fe0bf;
+  --color-brand-400: #3ddc97;
+  --color-brand-500: #2cc786;
+  --color-brand-600: #3ddc97;
+  --color-brand-700: #5fe3aa;
+  --color-brand-800: #8eeac4;
+  --color-brand-900: #b9f2da;
+  --color-brand-950: #04130d;
 
-  --color-clay-50: #fbefe9;
-  --color-clay-100: #f5d9cb;
-  --color-clay-300: #e39a78;
-  --color-clay-500: #c4572e;
-  --color-clay-600: #a9461f;
-  --color-clay-700: #8a3818;
+  --color-clay-50: #2a1710;
+  --color-clay-100: #3b1f14;
+  --color-clay-300: #ffb59a;
+  --color-clay-500: #ff7a50;
+  --color-clay-600: #ff9671;
+  --color-clay-700: #ffb08f;
 
-  --color-teal-50: #ecf4f1;
-  --color-teal-100: #d3e6df;
-  --color-teal-400: #7fb3a3;
-  --color-teal-500: #4f8f7c;
-  --color-teal-600: #3b7564;
-
-  --color-sun-50: #fcf5e4;
-  --color-sun-100: #f6e6bd;
+  --color-sun-50: #231c0b;
+  --color-sun-100: #30260d;
   --color-sun-300: #e8b64c;
-  --color-sun-400: #dca232;
-  --color-sun-600: #a8721a;
-  --color-sun-700: #85590f;
+  --color-sun-400: #f0c35e;
+  --color-sun-600: #f0c35e;
+  --color-sun-700: #f5cf78;
 
-  /* Iliq krem neytrallar */
-  --color-slate-50: #f3eee3;
-  --color-slate-100: #ebe4d5;
-  --color-slate-200: #ddd4c1;
-  --color-slate-300: #c9bfa9;
-  --color-slate-400: #9a907b;
-  --color-slate-500: #6f6858;
-  --color-slate-600: #524c40;
-  --color-slate-700: #3d3a31;
-  --color-slate-800: #27261f;
-  --color-slate-900: #14261d;
+  --color-teal-50: #0a1f1e;
+  --color-teal-100: #0e2c2a;
+  --color-teal-400: #5fd4c8;
+  --color-teal-500: #3cc0b2;
+  --color-teal-600: #6fe0d4;
 
-  --color-paper: #fbf8f1;
+  --color-slate-50: #06100d;
+  --color-slate-100: #0f201a;
+  --color-slate-200: #1a2f28;
+  --color-slate-300: #2c463d;
+  --color-slate-400: #66807a;
+  --color-slate-500: #8aa39a;
+  --color-slate-600: #a6bbb3;
+  --color-slate-700: #c3d4cd;
+  --color-slate-800: #d9e6e0;
+  --color-slate-900: #f0f7f3;
 
-  --shadow-soft: 0 1px 0 rgb(20 38 29 / 0.04);
-  --shadow-lift: 6px 6px 0 rgb(20 38 29 / 1);
-  --shadow-glow: 0 10px 30px -10px rgb(196 87 46 / 0.6);
+  --color-red-50: #2a1214;
+  --color-red-100: #3a1519;
+  --color-red-300: #7a2b30;
+  --color-red-400: #f87171;
+  --color-red-700: #fca5a5;
+  --color-red-800: #fecaca;
+
+  --color-amber-50: #241b08;
+  --color-amber-100: #33260a;
+  --color-amber-200: #4a370f;
+  --color-amber-300: #6b5215;
+  --color-amber-400: #f5c04a;
+  --color-amber-700: #fcd34d;
+  --color-amber-800: #fde68a;
+
+  --color-rose-100: #3a1422;
+  --color-rose-200: #5a1e33;
+  --color-rose-300: #fda4af;
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #fb7185;
+  --color-rose-700: #fda4af;
+
+  --shadow-soft: 0 1px 0 rgb(127 224 191 / 0.04);
+  --shadow-lift: 0 24px 60px -24px rgb(61 220 151 / 0.3);
+  --shadow-glow: 0 0 32px -6px rgb(61 220 151 / 0.55);
 }
 
 @layer base {
   html {
+    color-scheme: dark;
     -webkit-tap-highlight-color: transparent;
   }
   body {
     @apply min-h-dvh bg-slate-50 font-sans text-slate-800 antialiased;
+    background-image:
+      radial-gradient(60rem 40rem at 85% -10%, rgb(61 220 151 / 0.08), transparent 70%),
+      linear-gradient(rgb(127 224 191 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(127 224 191 / 0.045) 1px, transparent 1px);
+    background-size: auto, 40px 40px, 40px 40px;
   }
   h1, h2, h3 {
     @apply font-display tracking-tight text-slate-900;
   }
   ::selection {
-    @apply bg-sun-300 text-ink-950;
+    @apply bg-brand-400 text-night;
   }
 }
 
 @layer components {
 .card {
-  @apply rounded-2xl border border-ink-900/15 bg-paper p-5;
+  @apply rounded-2xl border border-line bg-paper/90 p-5 backdrop-blur-sm;
 }
 .card-hover {
-  @apply transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-ink-900 hover:shadow-lift;
+  @apply transition duration-200 hover:-translate-y-0.5 hover:border-brand-400/60 hover:shadow-glow;
 }
 
 .btn {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-ink-900 px-6 py-2.5 text-sm font-bold text-slate-50 transition hover:bg-ink-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
-}
-.btn-outline {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-ink-900 bg-transparent px-6 py-2.5 text-sm font-bold text-ink-900 transition hover:bg-ink-900 hover:text-slate-50 active:scale-[0.98];
-}
-.btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
-}
-.btn-danger {
-  @apply inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm font-medium text-red-700 transition hover:bg-red-50;
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-400 px-6 py-2.5 text-sm font-bold text-night transition hover:bg-brand-300 hover:shadow-glow active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
 }
 .btn-accent {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-clay-500 px-6 py-2.5 text-sm font-bold text-white transition hover:bg-clay-600 hover:shadow-glow active:scale-[0.98] disabled:opacity-50;
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-400 px-6 py-2.5 text-sm font-bold text-night shadow-glow transition hover:bg-brand-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+}
+.btn-outline {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-brand-300/40 bg-transparent px-6 py-2.5 text-sm font-bold text-slate-900 transition hover:border-brand-400 hover:text-brand-400 active:scale-[0.98];
+}
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
+}
+.btn-danger {
+  @apply inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-sm font-medium text-red-400 transition hover:bg-red-50;
 }
 
 .input {
-  @apply min-h-11 w-full rounded-xl border border-ink-900/25 bg-paper px-4 py-2.5 text-[15px] text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-ink-900 focus:ring-4 focus:ring-sun-300/40;
+  @apply min-h-11 w-full rounded-xl border border-line bg-slate-50/70 px-4 py-2.5 text-[15px] text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-400/15;
 }
 .label {
-  @apply mb-1.5 block text-sm font-semibold text-slate-700;
+  @apply mb-1.5 block font-mono text-xs font-semibold uppercase tracking-[0.12em] text-slate-600;
 }
 
 .eyebrow {
-  @apply inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-clay-600;
+  @apply inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-300;
 }
 .page-title {
-  @apply font-display text-4xl font-normal tracking-tight text-slate-900 sm:text-6xl;
+  @apply font-display text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl;
 }
 .section-title {
-  @apply flex items-center gap-2.5 font-display text-2xl font-semibold text-slate-900;
+  @apply flex items-center gap-2.5 font-display text-2xl font-bold text-slate-900;
 }
 .back-link {
-  @apply inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 transition hover:text-clay-600;
+  @apply inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 transition hover:text-brand-400;
 }
 .chip {
   @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
@@ -135,22 +161,42 @@
   @apply whitespace-pre-wrap text-[17px] leading-8 text-slate-700;
 }
 .panel-dark {
-  @apply relative overflow-hidden rounded-3xl bg-ink-900 text-slate-50;
+  @apply relative overflow-hidden rounded-3xl border border-line bg-panel text-slate-800;
 }
-.panel-dark h1, .panel-dark h2, .panel-dark h3 {
-  @apply text-slate-50;
-}
+/* Asosiy "laboratoriya" paneli (eski nomi saqlangan) */
 .panel-sage {
-  @apply relative overflow-hidden rounded-3xl border border-ink-900 bg-brand-200;
+  @apply relative overflow-hidden rounded-3xl border border-line bg-paper;
+  background-image:
+    radial-gradient(40rem 24rem at 100% 50%, rgb(61 220 151 / 0.12), transparent 70%),
+    linear-gradient(rgb(127 224 191 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(127 224 191 / 0.05) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px;
+}
+.readout {
+  @apply rounded-xl border border-brand-300/25 bg-slate-50/80 px-3.5 py-3 backdrop-blur-md;
 }
 .text-gradient {
-  @apply font-display italic text-clay-500;
+  @apply text-brand-400;
 }
 .mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  @apply font-mono;
 }
 .rule {
-  @apply border-t border-ink-900;
+  @apply border-t border-line;
+}
+
+/* Mikroskop linzasi */
+.lens-glass {
+  box-shadow:
+    0 0 0 10px #0d1f19,
+    0 0 0 11px rgb(127 224 191 / 0.35),
+    0 0 0 28px rgb(13 31 25 / 0.55),
+    0 0 90px 20px rgb(61 220 151 / 0.22);
+}
+.lens-vignette {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 55%, rgb(0 0 0 / 0.65) 100%),
+    radial-gradient(circle at 33% 28%, rgb(255 255 255 / 0.18), transparent 30%);
 }
 
 details > summary {
@@ -172,4 +218,9 @@ details > summary::-webkit-details-marker {
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+@keyframes scan {
+  0%, 100% { transform: translateY(-40%); opacity: 0; }
+  20%, 80% { opacity: 1; }
+  50% { transform: translateY(40%); }
 }

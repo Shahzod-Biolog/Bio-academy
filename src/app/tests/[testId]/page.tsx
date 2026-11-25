@@ -87,7 +87,7 @@ export default async function TestPage({
       {topic && <Link href={`/courses/${topic.course_id}`} className="back-link"><ArrowLeftIcon size={16} /> {topic.title}</Link>}
       <div className="card space-y-6 p-6 sm:p-8">
         <div className="flex items-start gap-4">
-          <span className="icon-bubble h-14 w-14 bg-ink-900 text-sun-300"><ClipboardIcon size={28} /></span>
+          <span className="icon-bubble h-14 w-14 bg-panel text-sun-300"><ClipboardIcon size={28} /></span>
           <div>
             <p className="eyebrow text-sun-700">Test</p>
             <h1 className="mt-1 font-display text-2xl font-bold sm:text-3xl">{test.title}</h1>
@@ -124,7 +124,7 @@ export default async function TestPage({
                   {countOptions.map((n) => (
                     <label key={n} className="cursor-pointer">
                       <input type="radio" name="count" value={n} className="peer sr-only" />
-                      <span className="block rounded-xl border border-slate-200 bg-white px-3 py-3.5 text-center transition peer-checked:border-ink-900 peer-checked:bg-ink-900 peer-checked:text-white peer-checked:[&_span]:text-brand-300 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-300 hover:border-brand-300">
+                      <span className="block rounded-xl border border-slate-200 bg-paper px-3 py-3.5 text-center transition peer-checked:border-brand-400 peer-checked:bg-brand-400 peer-checked:text-night peer-checked:[&_span]:text-night/70 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-300 hover:border-brand-300">
                         <b className="block text-lg">{n} ta</b>
                         <span className="text-xs text-slate-500">{minutesFor(n)} daqiqa</span>
                       </span>
@@ -132,7 +132,7 @@ export default async function TestPage({
                   ))}
                   <label className="cursor-pointer">
                     <input type="radio" name="count" value="all" defaultChecked className="peer sr-only" />
-                    <span className="block rounded-xl border border-slate-200 bg-white px-3 py-3.5 text-center transition peer-checked:border-ink-900 peer-checked:bg-ink-900 peer-checked:text-white peer-checked:[&_span]:text-brand-300 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-300 hover:border-brand-300">
+                    <span className="block rounded-xl border border-slate-200 bg-paper px-3 py-3.5 text-center transition peer-checked:border-brand-400 peer-checked:bg-brand-400 peer-checked:text-night peer-checked:[&_span]:text-night/70 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-300 hover:border-brand-300">
                       <b className="block text-lg">Barchasi</b>
                       <span className="text-xs text-slate-500">{pool} ta · {test.time_limit_minutes} daqiqa</span>
                     </span>

@@ -28,9 +28,9 @@ export function NavLinks({ links, vertical = false, onNavigate }: { links: NavIt
               "flex items-center gap-2 font-semibold transition " +
               (vertical ? "px-4 py-3 text-base " : "mx-2 py-1.5 ") +
               (vertical
-                ? "rounded-xl " + (active ? "bg-brand-200 text-ink-900" : "text-ink-900 hover:bg-slate-100")
-                : "border-b-2 uppercase tracking-[0.1em] text-[13px] " +
-                  (active ? "border-clay-500 text-ink-900" : "border-transparent text-slate-600 hover:text-ink-900"))
+                ? "rounded-xl " + (active ? "bg-brand-200 text-brand-400" : "text-slate-900 hover:bg-slate-100")
+                : "border-b-2 font-mono uppercase tracking-[0.14em] text-xs " +
+                  (active ? "border-brand-400 text-brand-400" : "border-transparent text-brand-300/80 hover:text-brand-400"))
             }
           >
             {vertical && <Icon size={20} />}

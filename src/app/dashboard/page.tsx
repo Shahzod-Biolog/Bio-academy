@@ -2,7 +2,7 @@ import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { formatDateTime } from "@/lib/format";
 import { CourseCard, EmptyState, ScoreBadge } from "@/components/CourseCard";
-import { Fern } from "@/components/Illustrations";
+import { Lens } from "@/components/Illustrations";
 import { ArrowRightIcon, BookIcon, CalendarIcon, ChartIcon, ClipboardIcon, LiveIcon } from "@/components/Icons";
 
 export default async function Dashboard() {
@@ -32,38 +32,39 @@ export default async function Dashboard() {
   const firstName = (profile.full_name || "").split(" ")[0] || "o'quvchi";
 
   const stats = [
-    { label: "Kurslar", value: courses?.length ?? 0, Icon: BookIcon, cls: "bg-ink-900 text-brand-300" },
-    { label: "Jonli darslar", value: upcoming?.length ?? 0, Icon: LiveIcon, cls: "bg-clay-500 text-white" },
-    { label: "O'rtacha natija", value: avg === null ? "—" : `${avg}%`, Icon: ChartIcon, cls: "bg-sun-300 text-ink-900" },
+    { label: "Kurslar", value: courses?.length ?? 0, Icon: BookIcon, cls: "bg-brand-100 text-brand-400" },
+    { label: "Jonli darslar", value: upcoming?.length ?? 0, Icon: LiveIcon, cls: "bg-clay-100 text-clay-500" },
+    { label: "O'rtacha natija", value: avg === null ? "—" : `${avg}%`, Icon: ChartIcon, cls: "bg-sun-100 text-sun-300" },
   ];
 
   return (
     <div className="space-y-10">
       <section className="panel-sage grid md:grid-cols-[1.6fr_1fr]">
         <div className="relative p-6 sm:p-10">
-          <p className="eyebrow text-brand-800">Shaxsiy kabinet</p>
-          <h1 className="mt-3 font-display text-5xl font-normal leading-none sm:text-7xl">
-            Salom, <em className="text-clay-500">{firstName}</em>!
+          <p className="eyebrow"><span className="h-2 w-2 rounded-full bg-brand-400 shadow-glow" /> Shaxsiy kabinet</p>
+          <h1 className="mt-3 font-display text-5xl font-bold leading-none tracking-[-0.03em] sm:text-7xl">
+            Salom, <span className="text-brand-400">{firstName}</span>!
           </h1>
-          <p className="mt-4 max-w-md text-[17px] text-ink-800">Bugun nimani o&apos;rganamiz? Har bir mavzu sizni maqsadga bir qadam yaqinlashtiradi.</p>
+          <p className="mt-4 max-w-md text-[17px] text-slate-600">Bugun nimani o&apos;rganamiz? Har bir mavzu sizni maqsadga bir qadam yaqinlashtiradi.</p>
           <div className="mt-8 grid max-w-xl grid-cols-3 gap-2 sm:gap-3">
             {stats.map((s) => (
-              <div key={s.label} className="rounded-2xl border border-ink-900 bg-slate-50 p-3 sm:p-4">
+              <div key={s.label} className="readout p-3 sm:p-4">
                 <div className={"icon-bubble mb-3 h-9 w-9 " + s.cls}><s.Icon size={18} /></div>
-                <p className="font-display text-3xl font-semibold text-ink-900 sm:text-4xl">{s.value}</p>
-                <p className="text-xs font-semibold text-slate-600">{s.label}</p>
+                <p className="font-display text-3xl font-bold text-slate-900 sm:text-4xl">{s.value}</p>
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500 sm:text-[11px]">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
-        <div className="relative hidden overflow-hidden border-l border-ink-900 md:block">
-          <Fern className="absolute -bottom-6 -left-6 h-[115%] w-[125%] max-w-none" />
+        <div className="relative hidden items-center justify-center p-10 md:flex">
+          <Lens className="w-full max-w-64" zoom={1.9} focus="60% 40%" />
+          <span className="absolute bottom-5 right-6 font-mono text-[11px] text-brand-300">×400</span>
         </div>
       </section>
 
       {upcoming && upcoming.length > 0 && (
         <section>
-          <h2 className="section-title mb-4"><span className="icon-bubble h-9 w-9 bg-clay-500 text-white"><LiveIcon size={18} /></span> Yaqin jonli darslar</h2>
+          <h2 className="section-title mb-4"><span className="icon-bubble h-9 w-9 bg-clay-100 text-clay-500"><LiveIcon size={18} /></span> Yaqin jonli darslar</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {upcoming.map((s) => (
               <div key={s.id} className="card flex flex-col">
@@ -80,8 +81,8 @@ export default async function Dashboard() {
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="section-title"><span className="icon-bubble h-9 w-9 bg-ink-900 text-brand-400"><BookIcon size={18} /></span> Kurslar</h2>
-          <Link href="/courses" className="inline-flex items-center gap-1 text-sm font-semibold text-slate-900">Barchasi <ArrowRightIcon size={15} /></Link>
+          <h2 className="section-title"><span className="icon-bubble h-9 w-9 bg-brand-100 text-brand-400"><BookIcon size={18} /></span> Kurslar</h2>
+          <Link href="/courses" className="inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-brand-300 hover:text-brand-400">Barchasi <ArrowRightIcon size={15} /></Link>
         </div>
         {courses && courses.length > 0 ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -94,11 +95,11 @@ export default async function Dashboard() {
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="section-title"><span className="icon-bubble h-9 w-9 bg-sun-300 text-ink-900"><ClipboardIcon size={18} /></span> Oxirgi test natijalari</h2>
-          <Link href="/results" className="inline-flex items-center gap-1 text-sm font-semibold text-slate-900">Barchasi <ArrowRightIcon size={15} /></Link>
+          <h2 className="section-title"><span className="icon-bubble h-9 w-9 bg-sun-100 text-sun-300"><ClipboardIcon size={18} /></span> Oxirgi test natijalari</h2>
+          <Link href="/results" className="inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-brand-300 hover:text-brand-400">Barchasi <ArrowRightIcon size={15} /></Link>
         </div>
         {attempts && attempts.length > 0 ? (
-          <div className="card divide-y divide-slate-100 p-0">
+          <div className="card divide-y divide-line p-0">
             {attempts.map((a) => (
               <Link key={a.id} href={`/results/${a.id}`} className="flex items-center justify-between gap-3 px-5 py-4 transition first:rounded-t-2xl last:rounded-b-2xl hover:bg-brand-50/50">
                 <span className="min-w-0 truncate font-medium">{(a.tests as unknown as { title: string } | null)?.title}</span>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { signIn, signUp } from "@/app/auth/actions";
-import { Fern, LogoMark } from "./Illustrations";
+import { Lens, LogoMark } from "./Illustrations";
 import { CheckIcon } from "./Icons";
 
 const PERKS = ["Video va jonli darslar", "Har dars uchun AI yordamchi", "Vaqtli testlar va natijalar"];
@@ -13,25 +13,26 @@ export function AuthForm({ mode, next }: { mode: "login" | "signup"; next?: stri
   const isLogin = mode === "login";
 
   return (
-    <div className="mx-auto grid max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lift lg:grid-cols-2">
-      <div className="relative hidden overflow-hidden border-r border-ink-900 bg-brand-200 p-10 lg:block">
-        <h2 className="relative font-display text-5xl font-normal leading-none text-ink-900">
-          Biologiya — <em className="text-clay-500">hayotning tili</em>
+    <div className="mx-auto grid max-w-5xl overflow-hidden rounded-3xl border border-line bg-paper shadow-lift lg:grid-cols-2">
+      <div className="panel-sage relative hidden rounded-none border-0 border-r border-line p-10 lg:block">
+        <p className="eyebrow relative">Namuna: hayot · ×400</p>
+        <h2 className="relative mt-4 font-display text-5xl font-bold leading-none tracking-[-0.03em] text-slate-900">
+          Biologiya — <span className="text-brand-400">hayotning tili</span>
         </h2>
         <ul className="relative mt-6 space-y-3">
           {PERKS.map((p) => (
-            <li key={p} className="flex items-center gap-3 font-semibold text-ink-800">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-900 text-slate-50"><CheckIcon size={14} /></span>
+            <li key={p} className="flex items-center gap-3 font-semibold text-slate-700">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-400 text-night"><CheckIcon size={14} /></span>
               {p}
             </li>
           ))}
         </ul>
-        <Fern className="absolute -bottom-24 -right-16 h-[80%] w-[110%] max-w-none" />
+        <div className="absolute -bottom-20 -right-20 w-80"><Lens className="w-full" zoom={1.8} focus="45% 50%" /></div>
       </div>
 
       <div className="p-6 sm:p-10">
         <LogoMark size={44} />
-        <h1 className="mt-5 font-display text-4xl font-normal sm:text-5xl">{isLogin ? "Xush kelibsiz!" : "Hisob yarating"}</h1>
+        <h1 className="mt-5 font-display text-4xl font-bold tracking-tight sm:text-5xl">{isLogin ? "Xush kelibsiz!" : "Hisob yarating"}</h1>
         <p className="mb-7 mt-1 text-slate-500">
           {isLogin ? "Darslaringizni davom ettirish uchun tizimga kiring" : "Bepul ro'yxatdan o'ting va o'qishni boshlang"}
         </p>
@@ -51,8 +52,8 @@ export function AuthForm({ mode, next }: { mode: "login" | "signup"; next?: stri
             <label className="label" htmlFor="password">Parol</label>
             <input id="password" name="password" type="password" className="input" required minLength={6} autoComplete={isLogin ? "current-password" : "new-password"} placeholder="Kamida 6 ta belgi" />
           </div>
-          {state?.error && <p className="rounded-2xl bg-red-50 p-3 text-sm text-red-700">{state.error}</p>}
-          {state?.message && <p className="rounded-2xl bg-brand-50 p-3 text-sm text-brand-700">{state.message}</p>}
+          {state?.error && <p className="rounded-xl border border-red-300 bg-red-50 p-3 text-sm text-red-700">{state.error}</p>}
+          {state?.message && <p className="rounded-xl border border-brand-300/30 bg-brand-50 p-3 text-sm text-brand-700">{state.message}</p>}
           <button className="btn-accent w-full py-3 text-base" disabled={pending}>
             {pending ? "Kuting..." : isLogin ? "Kirish" : "Ro'yxatdan o'tish"}
           </button>
