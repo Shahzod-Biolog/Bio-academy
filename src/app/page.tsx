@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { HelixAnimation, LabGrid } from "@/components/Illustrations";
-import { ArrowRightIcon, ClipboardIcon, LiveIcon, MicroscopeIcon, PlayIcon, SparkIcon } from "@/components/Icons";
+import { LabGrid } from "@/components/Illustrations";
+import { ArrowRightIcon, ClipboardIcon, ClockIcon, LeafIcon, LiveIcon, MicroscopeIcon, PlayIcon, SparkIcon } from "@/components/Icons";
 
 const TOPICS = ["Botanika", "Zoologiya", "Sitologiya", "Genetika", "Anatomiya", "Ekologiya", "Evolyutsiya", "Fiziologiya"];
 
@@ -22,35 +22,54 @@ export default async function Home() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      {/* Hero */}
-      <section className="panel-dark px-6 py-12 sm:px-12 sm:py-16">
-        <LabGrid className="absolute inset-0 h-full w-full" />
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-400/20 blur-3xl" />
-        <div className="relative grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <div>
-            <span className="mono inline-flex items-center gap-2 rounded-lg border border-brand-400/30 bg-brand-400/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-300">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-400" /> Biologiya onlayn akademiyasi
-            </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.02] sm:text-6xl lg:text-7xl">
-              Hayot kodini <br className="hidden sm:block" />
-              <span className="text-gradient">o&apos;qishni</span> o&apos;rganing.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
-              Video darslar, jonli mashg&apos;ulotlar, sun&apos;iy intellekt yordamchisi va vaqtli testlar. DTM va olimpiadaga tayyorgarlik uchun bitta platforma.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/signup" className="btn-accent px-6 py-3 text-base">
-                Bepul boshlash <ArrowRightIcon size={18} />
-              </Link>
-              <Link href="/login" className="inline-flex min-h-11 items-center rounded-xl border border-white/15 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/10">
-                Kirish
-              </Link>
-            </div>
+      {/* Hero: mikroskop ostidagi barg hujayralari fonida */}
+      <section className="relative -mt-6 ml-[calc(50%-50vw)] w-screen overflow-hidden sm:-mt-10">
+        <div className="absolute inset-0 scale-105 bg-[url('/hero-bg.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-950/75 via-brand-950/60 to-ink-950/85" />
+        <div className="absolute inset-0 bg-[radial-gradient(60rem_30rem_at_50%_40%,rgb(61_220_151/0.12),transparent_70%)]" />
+        <div className="relative mx-auto flex min-h-[calc(100dvh-4rem)] max-w-5xl flex-col items-center justify-center px-4 py-16 text-center sm:px-6 sm:py-24">
+          <span className="mono inline-flex items-center gap-2 rounded-full border border-sun-300/40 bg-sun-300/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-sun-300">
+            <LeafIcon size={14} /> Biologiya onlayn akademiyasi
+          </span>
+          <h1 className="mt-7 text-4xl font-bold leading-[1.05] text-white sm:text-6xl lg:text-7xl">
+            Hayot sirlarini
+            <br />
+            <span className="text-sun-300">ilm bilan</span> kashf eting
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-200/90 sm:text-xl">
+            Video darslar, jonli mashg&apos;ulotlar, sun&apos;iy intellekt yordamchisi va vaqtli testlar. DTM va olimpiadaga tayyorgarlik uchun bitta platforma.
+          </p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            {["Istalgan vaqtda, istalgan qurilmada", "Savolingizga darhol javob"].map((t, i) => (
+              <span key={t} className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur">
+                {i === 0 ? <ClockIcon size={16} className="text-sun-300" /> : <SparkIcon size={16} className="text-sun-300" />} {t}
+              </span>
+            ))}
           </div>
-          <div className="relative mx-auto hidden h-80 items-center justify-center sm:flex">
-            <div className="absolute inset-0 rounded-full bg-brand-400/10 blur-2xl" />
-            <HelixAnimation rungs={18} className="relative rotate-[20deg]" />
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <Link href="/signup" className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-sun-400 px-7 py-3 text-base font-bold text-ink-950 shadow-[0_10px_30px_-10px_rgb(247_173_42/0.7)] transition hover:bg-sun-300 active:scale-[0.98]">
+              Bepul boshlash <ArrowRightIcon size={18} />
+            </Link>
+            <Link href="/login" className="inline-flex min-h-12 items-center rounded-xl border-2 border-white/30 px-7 py-3 text-base font-bold text-white transition hover:border-white hover:bg-white/10">
+              Kirish
+            </Link>
           </div>
+          <div className="mt-12 grid w-full max-w-3xl grid-cols-3 gap-3 sm:gap-5">
+            {[
+              { Icon: PlayIcon, v: "Video", l: "darslar" },
+              { Icon: SparkIcon, v: "24/7", l: "AI yordamchi" },
+              { Icon: ClipboardIcon, v: "10–50", l: "savolli testlar" },
+            ].map((s) => (
+              <div key={s.l} className="rounded-2xl border border-white/15 bg-white/10 px-2 py-5 backdrop-blur-md sm:px-4">
+                <s.Icon size={26} className="mx-auto text-sun-300" />
+                <p className="mt-2 font-display text-2xl font-bold text-white sm:text-3xl">{s.v}</p>
+                <p className="text-xs text-slate-300 sm:text-sm">{s.l}</p>
+              </div>
+            ))}
+          </div>
+          <span className="mt-12 hidden h-10 w-6 justify-center rounded-full border-2 border-white/30 pt-2 sm:flex" aria-hidden>
+            <span className="h-2 w-1 animate-bounce rounded-full bg-white/70" />
+          </span>
         </div>
       </section>
 

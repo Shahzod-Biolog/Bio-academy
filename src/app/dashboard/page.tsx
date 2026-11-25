@@ -2,7 +2,7 @@ import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { formatDateTime } from "@/lib/format";
 import { CourseCard, EmptyState, ScoreBadge } from "@/components/CourseCard";
-import { HelixAnimation, LabGrid } from "@/components/Illustrations";
+import { HelixAnimation } from "@/components/Illustrations";
 import { ArrowRightIcon, BookIcon, CalendarIcon, ChartIcon, ClipboardIcon, LiveIcon } from "@/components/Icons";
 
 export default async function Dashboard() {
@@ -40,7 +40,8 @@ export default async function Dashboard() {
   return (
     <div className="space-y-10">
       <section className="panel-dark p-6 sm:p-10">
-        <LabGrid className="absolute inset-0 h-full w-full" />
+        <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/95 via-ink-950/85 to-brand-950/70" />
         <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-brand-400/20 blur-3xl" />
         <HelixAnimation rungs={12} className="pointer-events-none absolute right-16 top-1/2 hidden -translate-y-1/2 rotate-[30deg] opacity-70 lg:flex" />
         <div className="relative">

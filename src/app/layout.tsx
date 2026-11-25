@@ -17,7 +17,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="uz" className={`${body.variable} ${heading.variable}`}>
-      <body className="flex min-h-dvh flex-col">
+      <body className="flex min-h-dvh flex-col overflow-x-clip">
         <Header />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-10">{children}</main>
         <footer className="mt-10 bg-ink-950 text-slate-400">
