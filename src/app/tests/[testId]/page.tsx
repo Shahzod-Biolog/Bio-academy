@@ -5,6 +5,8 @@ import { formatDateTime } from "@/lib/format";
 import { TestRunner } from "@/components/TestRunner";
 import { startTest } from "../actions";
 
+const COUNT_CHOICES = [10, 20, 30, 40, 50];
+
 export default async function TestPage({
   params,
   searchParams,
@@ -33,19 +35,22 @@ export default async function TestPage({
   if (attemptId) {
     const { data: attempt } = await supabase
       .from("test_attempts")
-      .select("id, started_at, finished_at, user_id")
+      .select("id, started_at, finished_at, user_id, question_ids, time_limit_minutes")
       .eq("id", attemptId)
       .single();
     if (!attempt || attempt.user_id !== user.id) notFound();
     if (attempt.finished_at) redirect(`/results/${attempt.id}`);
-    const deadline = new Date(attempt.started_at).getTime() + test.time_limit_minutes * 60 * 1000;
+    const minutes = attempt.time_limit_minutes ?? test.time_limit_minutes;
+    const deadline = new Date(attempt.started_at).getTime() + minutes * 60 * 1000;
+    const chosen = attempt.question_ids as string[] | null;
+    const attemptQuestions = chosen ? (questions ?? []).filter((q) => chosen.includes(q.id)) : (questions ?? []);
     return (
       <div className="mx-auto max-w-3xl">
         <h1 className="mb-4 text-2xl font-bold">{test.title}</h1>
         <TestRunner
           attemptId={attempt.id}
           deadline={deadline}
-          questions={(questions ?? []).map((q) => ({ id: q.id, text: q.text, options: q.options as string[] }))}
+          questions={attemptQuestions.map((q) => ({ id: q.id, text: q.text, options: q.options as string[] }))}
         />
       </div>
     );
@@ -59,19 +64,69 @@ export default async function TestPage({
     .not("finished_at", "is", null)
     .order("finished_at", { ascending: false });
 
+  const { data: openAttempts } = await supabase
+    .from("test_attempts")
+    .select("id, started_at, time_limit_minutes, question_ids")
+    .eq("test_id", testId)
+    .eq("user_id", user.id)
+    .is("finished_at", null)
+    .order("started_at", { ascending: false })
+    .limit(1);
+  const open = openAttempts?.[0];
+  const openActive =
+    open && new Date(open.started_at).getTime() + (open.time_limit_minutes ?? test.time_limit_minutes) * 60 * 1000 > Date.now();
+
+  const pool = questions?.length ?? 0;
+  const countOptions = COUNT_CHOICES.filter((n) => n < pool);
+  const minutesFor = (n: number) => Math.max(1, Math.ceil((test.time_limit_minutes * n) / pool));
+
   return (
     <div className="mx-auto max-w-2xl space-y-5">
       {topic && <Link href={`/courses/${topic.course_id}`} className="text-sm text-slate-500">← {topic.title}</Link>}
       <div className="card space-y-4 p-6">
         <h1 className="text-2xl font-bold">📝 {test.title}</h1>
         <ul className="space-y-1 text-slate-600">
-          <li>Savollar soni: <b>{questions?.length ?? 0}</b></li>
-          <li>Vaqt: <b>{test.time_limit_minutes} daqiqa</b></li>
+          <li>Testdagi savollar: <b>{pool}</b></li>
+          <li>Barcha savollar uchun vaqt: <b>{test.time_limit_minutes} daqiqa</b></li>
           <li>Vaqt tugaganda test avtomatik yakunlanadi.</li>
         </ul>
-        {(questions?.length ?? 0) > 0 ? (
-          <form action={startTest}>
+        {pool > 0 && openActive ? (
+          <div className="space-y-3">
+            <p className="rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
+              Sizda boshlangan, lekin yakunlanmagan test bor
+              {open.question_ids ? ` (${(open.question_ids as string[]).length} ta savol)` : ""}.
+            </p>
+            <Link href={`/tests/${test.id}?attempt=${open.id}`} className="btn w-full py-3 text-base">
+              Testni davom ettirish
+            </Link>
+          </div>
+        ) : pool > 0 ? (
+          <form action={startTest} className="space-y-4">
             <input type="hidden" name="test_id" value={test.id} />
+            {countOptions.length > 0 && (
+              <fieldset>
+                <legend className="mb-2 font-semibold">Nechta savol yechasiz?</legend>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {countOptions.map((n) => (
+                    <label key={n} className="cursor-pointer">
+                      <input type="radio" name="count" value={n} className="peer sr-only" />
+                      <span className="block rounded-xl border border-slate-200 px-3 py-3 text-center transition peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-800 hover:border-slate-400">
+                        <b className="block text-lg">{n} ta</b>
+                        <span className="text-xs text-slate-500">{minutesFor(n)} daqiqa</span>
+                      </span>
+                    </label>
+                  ))}
+                  <label className="cursor-pointer">
+                    <input type="radio" name="count" value="all" defaultChecked className="peer sr-only" />
+                    <span className="block rounded-xl border border-slate-200 px-3 py-3 text-center transition peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-800 hover:border-slate-400">
+                      <b className="block text-lg">Barchasi</b>
+                      <span className="text-xs text-slate-500">{pool} ta · {test.time_limit_minutes} daqiqa</span>
+                    </span>
+                  </label>
+                </div>
+                <p className="mt-2 text-xs text-slate-500">Savollar testdan tasodifiy tanlanadi, har safar har xil bo&apos;ladi.</p>
+              </fieldset>
+            )}
             <button className="btn w-full py-3 text-base">Testni boshlash</button>
           </form>
         ) : (

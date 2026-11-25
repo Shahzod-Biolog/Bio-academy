@@ -9,15 +9,17 @@ export default async function ResultPage({ params }: { params: Promise<{ attempt
   const { supabase } = await requireUser();
   const { data: attempt } = await supabase
     .from("test_attempts")
-    .select("id, test_id, score, total, answers, finished_at, tests(title)")
+    .select("id, test_id, score, total, answers, finished_at, question_ids, tests(title)")
     .eq("id", attemptId)
     .single();
   if (!attempt || !attempt.finished_at) notFound();
 
-  const [{ data: questions }, { data: keys }] = await Promise.all([
+  const [{ data: allQuestions }, { data: keys }] = await Promise.all([
     supabase.from("questions").select("id, text, options, position").eq("test_id", attempt.test_id).order("position"),
     supabase.rpc("attempt_review", { p_attempt_id: attempt.id }),
   ]);
+  const picked = attempt.question_ids as string[] | null;
+  const questions = picked ? (allQuestions ?? []).filter((q) => picked.includes(q.id)) : allQuestions;
   const keyMap = new Map((keys as { question_id: string; correct_index: number; explanation: string }[] | null ?? []).map((k) => [k.question_id, k]));
   const answers = (attempt.answers ?? {}) as Record<string, number>;
   const pct = attempt.total ? Math.round(((attempt.score ?? 0) / attempt.total) * 100) : 0;

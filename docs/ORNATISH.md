@@ -158,6 +158,12 @@ Vercel → Project → **Settings → Environment Variables** da qo'shish mumkin
 - **Tasdiqlash emaili kelmaydi** — Spam papkasini tekshiring. Supabase bepul rejasida soatiga bir necha email yuboradi; ko'p o'quvchi uchun Supabase → Authentication → **SMTP Settings** orqali o'z pochta xizmatingizni ulang (yoki sinov paytida Authentication → Providers → Email → **Confirm email** ni o'chiring).
 - **Admin menyusi chiqmayapti** — 6-qadamdagi SQL'da email to'g'ri yozilganini tekshiring, so'ng saytdan chiqib qayta kiring.
 
+## Yangilanishlar (SQL)
+
+Ba'zi yangi imkoniyatlar Supabase bazasiga kichik o'zgartirish talab qiladi. Bunday paytda Supabase → **SQL Editor** → **New query** ni oching, ko'rsatilgan faylning butun matnini joylang va **Run** ni bosing:
+
+- [`supabase/update-savollar-soni.sql`](../supabase/update-savollar-soni.sql) — o'quvchi testda nechta savol yechishini o'zi tanlaydi (10, 20, 30, 40, 50 yoki barchasi).
+
 ## Dasturchilar uchun (kompyuterda ishga tushirish)
 
 ```bash
