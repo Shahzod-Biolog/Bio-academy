@@ -50,6 +50,8 @@ create table if not exists public.courses (
   position int not null default 0,
   created_at timestamptz not null default now()
 );
+-- Bo'lim: 'nazariy' (Nazariy darslar) yoki 'masala' (Masala darslari)
+alter table public.courses add column if not exists section text not null default 'masala';
 
 create table if not exists public.topics (
   id uuid primary key default gen_random_uuid(),

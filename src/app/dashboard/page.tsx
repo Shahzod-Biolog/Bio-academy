@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { formatDateTime } from "@/lib/format";
-import { CourseCard, EmptyState, ScoreBadge } from "@/components/CourseCard";
+import { EmptyState, ScoreBadge } from "@/components/CourseCard";
+import { CourseSections } from "@/components/CourseSections";
 import { Lens } from "@/components/Illustrations";
 import { ArrowRightIcon, BookIcon, CalendarIcon, ChartIcon, ClipboardIcon, LiveIcon } from "@/components/Icons";
 
@@ -9,7 +10,7 @@ export default async function Dashboard() {
   const { supabase, profile } = await requireUser();
 
   const [{ data: courses }, { data: upcoming }, { data: attempts }] = await Promise.all([
-    supabase.from("courses").select("id, title, description").order("position"),
+    supabase.from("courses").select("*").order("position"),
     supabase
       .from("live_sessions")
       .select("id, title, starts_at, meeting_url")
@@ -85,9 +86,7 @@ export default async function Dashboard() {
           <Link href="/courses" className="inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-brand-300 hover:text-brand-400">Barchasi <ArrowRightIcon size={15} /></Link>
         </div>
         {courses && courses.length > 0 ? (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.map((c, i) => <CourseCard key={c.id} course={c} index={i} />)}
-          </div>
+          <CourseSections courses={courses} />
         ) : (
           <EmptyState icon={<BookIcon />}>Hozircha kurslar yo&apos;q.</EmptyState>
         )}

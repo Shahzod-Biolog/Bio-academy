@@ -37,6 +37,14 @@ export default async function AdminTest({
     .select("id, text, options, position, question_keys(correct_index, explanation)")
     .eq("test_id", testId)
     .order("position");
+  // Testni boshqa mavzuga ko'chirish uchun barcha mavzular ro'yxati
+  const { data: allTopics } = await supabase.from("topics").select("id, title, position, courses(title, position)").order("position");
+  const topicOptions = (allTopics ?? [])
+    .map((t) => {
+      const c = t.courses as unknown as { title: string; position: number } | null;
+      return { id: t.id, label: `${c?.title ?? "?"} → ${t.title}`, cp: c?.position ?? 0, tp: t.position };
+    })
+    .sort((a, b) => a.cp - b.cp || a.label.localeCompare(b.label) || a.tp - b.tp);
   const { count: attempts } = await supabase.from("test_attempts").select("id", { count: "exact", head: true }).eq("test_id", testId).not("finished_at", "is", null);
 
   return (
@@ -48,6 +56,12 @@ export default async function AdminTest({
       <form action={saveTest} className="card grid gap-3 sm:grid-cols-[1fr_9rem_auto] sm:items-end">
         <input type="hidden" name="id" value={test.id} />
         <div><label className="label">Test nomi</label><input name="title" className="input" defaultValue={test.title} required /></div>
+        <div className="sm:order-last sm:col-span-3">
+          <label className="label">Qaysi kurs va mavzuda turadi</label>
+          <select name="topic_id" className="input" defaultValue={test.topic_id}>
+            {topicOptions.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+          </select>
+        </div>
         <div><label className="label">Vaqt (daqiqa)</label><input name="time_limit_minutes" type="number" min={1} className="input" defaultValue={test.time_limit_minutes} /></div>
         <button className="btn">Saqlash</button>
       </form>
