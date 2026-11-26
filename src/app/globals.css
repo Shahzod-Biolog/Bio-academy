@@ -189,7 +189,6 @@
 .dna-scroll {
   animation: dna-twist 9s linear infinite;
 }
-
 details > summary {
   list-style: none;
 }

@@ -27,6 +27,7 @@ export function Lens({
   speed = 9,
   marker = true,
   ring = true,
+  image,
 }: {
   className?: string;
   hue?: number;
@@ -34,23 +35,32 @@ export function Lens({
   speed?: number;
   marker?: boolean;
   ring?: boolean;
+  /** Spiral o'rniga ko'rsatiladigan haqiqiy surat (masalan /specimens/hujayra.jpg) */
+  image?: string;
 }) {
   return (
     <div className={"relative aspect-square " + className} aria-hidden>
       {ring && <div className="absolute -inset-[11%] rounded-full border border-dashed border-brand-300/40" />}
-      <div className="lens-glass lens-bg absolute inset-0 overflow-hidden rounded-full" style={hue ? { filter: `hue-rotate(${hue}deg)` } : undefined}>
-        <div className="absolute left-1/2 top-1/2 h-[175%] w-[62%]" style={{ transform: `translate(-50%, -50%) rotate(${tilt}deg)` }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/dna.svg" alt="" className="dna-scroll block w-full" style={{ animationDuration: `${speed}s` }} />
-        </div>
+      <div className="lens-glass lens-bg absolute inset-0 overflow-hidden rounded-full" style={hue && !image ? { filter: `hue-rotate(${hue}deg)` } : undefined}>
+        {image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        ) : (
+          <div className="absolute left-1/2 top-1/2 h-[175%] w-[62%]" style={{ transform: `translate(-50%, -50%) rotate(${tilt}deg)` }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/dna.svg" alt="" className="dna-scroll block w-full" style={{ animationDuration: `${speed}s` }} />
+          </div>
+        )}
         <div className="lens-vignette absolute inset-0 rounded-full" />
-        <div className="absolute inset-x-0 top-1/2 h-px animate-[scan_7s_ease-in-out_infinite] bg-brand-200/60 shadow-[0_0_12px_2px_rgb(61_220_151/0.6)]" />
+        {!image && <div className="absolute inset-x-0 top-1/2 h-px animate-[scan_7s_ease-in-out_infinite] bg-brand-200/60 shadow-[0_0_12px_2px_rgb(61_220_151/0.6)]" />}
       </div>
       <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full">
-        <g stroke="#b4e9cc" strokeOpacity=".6" fill="none" strokeWidth=".35">
-          <path d="M50 4v14M50 82v14M4 50h14M82 50h14" />
-          <circle cx="50" cy="50" r="7.5" />
-        </g>
+        {!image && (
+          <g stroke="#b4e9cc" strokeOpacity=".6" fill="none" strokeWidth=".35">
+            <path d="M50 4v14M50 82v14M4 50h14M82 50h14" />
+            <circle cx="50" cy="50" r="7.5" />
+          </g>
+        )}
         {marker && <circle cx="69" cy="33" r="5.5" fill="none" stroke="#f2b632" strokeWidth=".6" strokeOpacity=".95" />}
       </svg>
     </div>
