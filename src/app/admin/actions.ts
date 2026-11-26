@@ -20,7 +20,12 @@ function check(error: { message: string } | null) {
 export async function saveCourse(formData: FormData) {
   const { supabase } = await requireAdmin();
   const id = str(formData, "id");
-  const row = { title: str(formData, "title"), description: str(formData, "description"), position: num(formData, "position") };
+  const row = {
+    title: str(formData, "title"),
+    description: str(formData, "description"),
+    position: num(formData, "position"),
+    section: str(formData, "section") === "nazariy" ? "nazariy" : "masala",
+  };
   if (id) check((await supabase.from("courses").update(row).eq("id", id)).error);
   else check((await supabase.from("courses").insert(row)).error);
   revalidatePath("/admin");
@@ -87,7 +92,9 @@ export async function saveTest(formData: FormData) {
   const id = str(formData, "id");
   const row = { title: str(formData, "title"), time_limit_minutes: Math.max(1, num(formData, "time_limit_minutes", 20)) };
   if (id) {
-    check((await supabase.from("tests").update(row).eq("id", id)).error);
+    // Testni boshqa mavzuga ko'chirish (admin "Mavzu" ro'yxatidan tanlaydi)
+    const topicId = str(formData, "topic_id");
+    check((await supabase.from("tests").update(topicId ? { ...row, topic_id: topicId } : row).eq("id", id)).error);
     revalidatePath(`/admin/tests/${id}`);
   } else {
     const { data, error } = await supabase.from("tests").insert({ ...row, topic_id: str(formData, "topic_id") }).select("id").single();

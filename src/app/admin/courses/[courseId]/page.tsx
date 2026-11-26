@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { ConfirmButton } from "@/components/ConfirmButton";
+import { SECTIONS, sectionOf } from "@/lib/sections";
 import { deleteCourse, deleteLesson, deleteTopic, saveCourse, saveTest, saveTopic } from "../../actions";
 
 type Topic = {
@@ -43,6 +44,12 @@ export default async function AdminCourse({
           <input type="hidden" name="id" value={course.id} />
           <div><label className="label">Nomi</label><input name="title" className="input" defaultValue={course.title} required /></div>
           <div><label className="label">Tartib raqami</label><input name="position" type="number" className="input" defaultValue={course.position} /></div>
+          <div>
+            <label className="label">Bo&apos;lim</label>
+            <select name="section" className="input" defaultValue={sectionOf(course)}>
+              {SECTIONS.map((s) => <option key={s.key} value={s.key}>{s.title}</option>)}
+            </select>
+          </div>
           <div className="sm:col-span-2"><label className="label">Tavsif</label><textarea name="description" className="input" rows={2} defaultValue={course.description} /></div>
           <button className="btn">Saqlash</button>
         </form>
