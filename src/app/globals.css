@@ -189,6 +189,17 @@
 .dna-scroll {
   animation: dna-twist 9s linear infinite;
 }
+/* Kurs preparati (o'simlik, hayvon, hujayra...) linza ichida sekin suzadi */
+.specimen-float {
+  animation: specimen-float 7s ease-in-out infinite;
+}
+@keyframes specimen-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-1.5%) scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .specimen-float { animation: none; }
+}
 
 details > summary {
   list-style: none;

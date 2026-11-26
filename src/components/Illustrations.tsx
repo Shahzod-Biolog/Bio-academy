@@ -27,6 +27,7 @@ export function Lens({
   speed = 9,
   marker = true,
   ring = true,
+  image,
 }: {
   className?: string;
   hue?: number;
@@ -34,15 +35,24 @@ export function Lens({
   speed?: number;
   marker?: boolean;
   ring?: boolean;
+  /** Spiral o'rniga ko'rsatiladigan preparat rasmi (masalan /specimens/hujayra.svg) */
+  image?: string;
 }) {
   return (
     <div className={"relative aspect-square " + className} aria-hidden>
       {ring && <div className="absolute -inset-[11%] rounded-full border border-dashed border-brand-300/40" />}
-      <div className="lens-glass lens-bg absolute inset-0 overflow-hidden rounded-full" style={hue ? { filter: `hue-rotate(${hue}deg)` } : undefined}>
-        <div className="absolute left-1/2 top-1/2 h-[175%] w-[62%]" style={{ transform: `translate(-50%, -50%) rotate(${tilt}deg)` }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/dna.svg" alt="" className="dna-scroll block w-full" style={{ animationDuration: `${speed}s` }} />
-        </div>
+      <div className="lens-glass lens-bg absolute inset-0 overflow-hidden rounded-full" style={hue && !image ? { filter: `hue-rotate(${hue}deg)` } : undefined}>
+        {image ? (
+          <div className="absolute inset-0 -translate-x-[5%]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={image} alt="" className="specimen-float block h-full w-full" />
+          </div>
+        ) : (
+          <div className="absolute left-1/2 top-1/2 h-[175%] w-[62%]" style={{ transform: `translate(-50%, -50%) rotate(${tilt}deg)` }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/dna.svg" alt="" className="dna-scroll block w-full" style={{ animationDuration: `${speed}s` }} />
+          </div>
+        )}
         <div className="lens-vignette absolute inset-0 rounded-full" />
         <div className="absolute inset-x-0 top-1/2 h-px animate-[scan_7s_ease-in-out_infinite] bg-brand-200/60 shadow-[0_0_12px_2px_rgb(61_220_151/0.6)]" />
       </div>

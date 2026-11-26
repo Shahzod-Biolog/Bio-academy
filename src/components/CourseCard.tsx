@@ -10,6 +10,20 @@ const SLIDES = [
   { hue: 140, tilt: -40 },
 ];
 
+/** Kurs nomiga qarab linza ichidagi mavzuga mos rasm. Mos kelmasa — DNK spirali. */
+const SPECIMENS: [RegExp, string][] = [
+  [/botanika|o['‘’`]?simlik/i, "/specimens/botanika.svg"],
+  [/zoologiya|hayvon/i, "/specimens/zoologiya.svg"],
+  [/odam|salomatlik|anatomiya/i, "/specimens/odam.svg"],
+  [/sitologiya|hujayra/i, "/specimens/hujayra.svg"],
+  [/umumiy biologiya/i, "/specimens/umumiy.svg"],
+  [/11-sinf|ekosistema|ekologiya/i, "/specimens/ekosistema.svg"],
+];
+
+export function specimenFor(title: string) {
+  return SPECIMENS.find(([re]) => re.test(title))?.[1];
+}
+
 export function CourseCard({ course, index }: { course: { id: string; title: string; description: string | null }; index: number }) {
   const { Icon } = topicTheme(course.title, index);
   const slide = SLIDES[index % SLIDES.length];
@@ -17,7 +31,7 @@ export function CourseCard({ course, index }: { course: { id: string; title: str
     <Link href={`/courses/${course.id}`} className="card card-hover group flex flex-col overflow-hidden p-0">
       <div className="panel-sage relative h-44 rounded-none border-0 border-b border-line">
         <div className="absolute -right-4 top-1/2 w-40 -translate-y-1/2 transition duration-700 group-hover:scale-105">
-          <Lens className="w-full" hue={slide.hue} tilt={slide.tilt} ring={false} marker={false} />
+          <Lens className="w-full" hue={slide.hue} tilt={slide.tilt} ring={false} marker={false} image={specimenFor(course.title)} />
         </div>
         <span className="absolute left-5 top-4 z-10 font-mono text-xs font-semibold text-brand-300">PREPARAT № {String(index + 1).padStart(2, "0")}</span>
         <span className="absolute bottom-4 left-5 z-10 flex h-12 w-12 items-center justify-center rounded-xl border border-brand-300/30 bg-white/90 text-brand-700">
