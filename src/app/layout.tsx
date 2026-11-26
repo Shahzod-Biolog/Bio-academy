@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span className="flex items-center gap-2.5 font-display text-lg font-bold text-slate-900">
               <LogoMark size={26} /> Bio <span className="-ml-1.5 text-brand-400">Academy</span>
             </span>
-            <span className="font-mono text-xs uppercase tracking-[0.15em] text-slate-500">© {new Date().getFullYear()} · Ko&apos;zga ko&apos;rinmas dunyoni kashf eting</span>
+            <span className="font-mono text-xs uppercase tracking-[0.15em] text-slate-500">© {new Date().getFullYear()} · Ko&apos;zga ko&apos;rinmas dunyoni kashf eting · <a href="/rasmlar-manbasi" className="hover:text-brand-400">Rasmlar manbasi</a></span>
           </div>
         </footer>
       </body>

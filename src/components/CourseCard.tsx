@@ -10,14 +10,14 @@ const SLIDES = [
   { hue: 140, tilt: -40 },
 ];
 
-/** Kurs nomiga qarab linza ichidagi mavzuga mos rasm. Mos kelmasa — DNK spirali. */
+/** Kurs nomiga qarab linza ichidagi haqiqiy surat (manbalar: /rasmlar-manbasi). Mos kelmasa — DNK spirali. */
 const SPECIMENS: [RegExp, string][] = [
-  [/botanika|o['‘’`]?simlik/i, "/specimens/botanika.svg"],
-  [/zoologiya|hayvon/i, "/specimens/zoologiya.svg"],
-  [/odam|salomatlik|anatomiya/i, "/specimens/odam.svg"],
-  [/sitologiya|hujayra/i, "/specimens/hujayra.svg"],
-  [/umumiy biologiya/i, "/specimens/umumiy.svg"],
-  [/11-sinf|ekosistema|ekologiya/i, "/specimens/ekosistema.svg"],
+  [/botanika|o['‘’`]?simlik/i, "/specimens/botanika.jpg"],
+  [/zoologiya|hayvon/i, "/specimens/zoologiya.jpg"],
+  [/odam|salomatlik|anatomiya/i, "/specimens/odam.jpg"],
+  [/sitologiya|hujayra/i, "/specimens/hujayra.jpg"],
+  [/umumiy biologiya/i, "/specimens/umumiy.jpg"],
+  [/11-sinf|ekosistema|ekologiya/i, "/specimens/ekosistema.jpg"],
 ];
 
 export function specimenFor(title: string) {
