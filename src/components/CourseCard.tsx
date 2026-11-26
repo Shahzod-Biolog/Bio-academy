@@ -12,6 +12,8 @@ const SLIDES = [
 
 /** Kurs nomiga qarab linza ichidagi haqiqiy surat (manbalar: /rasmlar-manbasi). Mos kelmasa — DNK spirali. */
 const SPECIMENS: [RegExp, string][] = [
+  [/\bDNK\b|nuklein/i, "/specimens/dnk.jpg"],
+  [/\bATF\b|energiya/i, "/specimens/atf.jpg"],
   [/botanika|o['‘’`]?simlik/i, "/specimens/botanika.jpg"],
   [/zoologiya|hayvon/i, "/specimens/zoologiya.jpg"],
   [/odam|salomatlik|anatomiya/i, "/specimens/odam.jpg"],
