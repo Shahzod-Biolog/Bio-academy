@@ -2,6 +2,7 @@ import { requireAdmin } from "@/lib/auth";
 import { formatDateTime, isoToTashkentLocal } from "@/lib/format";
 import { ConfirmButton } from "@/components/ConfirmButton";
 import { deleteLive, saveLive } from "../actions";
+import { BunnyUploader } from "@/components/BunnyUploader";
 
 type Live = {
   id: string;
@@ -14,6 +15,7 @@ type Live = {
 };
 
 function LiveForm({ s }: { s?: Live }) {
+  const key = s?.id ?? "new";
   return (
     <form action={saveLive} className="grid gap-3 sm:grid-cols-2">
       {s && <input type="hidden" name="id" value={s.id} />}
@@ -23,12 +25,13 @@ function LiveForm({ s }: { s?: Live }) {
       <div className="sm:col-span-2"><label className="label">Tavsif</label><textarea name="description" className="input" rows={2} defaultValue={s?.description} /></div>
       <div>
         <label className="label">Dars yozuvi qayerda</label>
-        <select name="recording_provider" className="input" defaultValue={s?.recording_provider ?? "youtube"}>
+        <select id={`rec_provider_${key}`} name="recording_provider" className="input" defaultValue={s?.recording_provider ?? "youtube"}>
           <option value="youtube">YouTube</option>
           <option value="bunny">Bunny Stream</option>
         </select>
       </div>
-      <div><label className="label">Yozuv havolasi / ID (darsdan keyin)</label><input name="recording_ref" className="input" defaultValue={s?.recording_ref} /></div>
+      <div><label className="label">Yozuv havolasi / ID (darsdan keyin)</label><input id={`rec_ref_${key}`} name="recording_ref" className="input" defaultValue={s?.recording_ref} /></div>
+      <div className="sm:col-span-2"><BunnyUploader refInputId={`rec_ref_${key}`} providerSelectId={`rec_provider_${key}`} /></div>
       <button className="btn sm:col-span-2">{s ? "Saqlash" : "Jadvalga qo'shish"}</button>
     </form>
   );

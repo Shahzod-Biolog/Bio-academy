@@ -20,6 +20,8 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ANTHROPIC_API_KEY=
 NEXT_PUBLIC_BUNNY_LIBRARY_ID=
+BUNNY_STREAM_API_KEY=
+BUNNY_TOKEN_KEY=
 ```
 
 ⚠️ **ANTHROPIC_API_KEY ni hech kimga bermang va hech qayerga (Telegram, GitHub) joylamang** — u bilan sizning hisobingizdan pul sarflash mumkin.
@@ -46,10 +48,14 @@ NEXT_PUBLIC_BUNNY_LIBRARY_ID=
 
 1. https://bunny.net ga kiring va ro'yxatdan o'ting (karta ulash so'raladi, 14 kun bepul).
 2. Chap menyudan **Stream** → **Add Video Library** → nom bering (`bio-academy`) → mintaqa sifatida **Europe** ni tanlang.
-3. Kutubxona ichida **API** bo'limiga kiring va **Video Library ID** raqamini yozib oling → `NEXT_PUBLIC_BUNNY_LIBRARY_ID`.
-4. (Tavsiya) **Security** bo'limida **Allowed Domains** ga saytingiz manzilini qo'shing (5-qadamdan keyin bilib olasiz, masalan `bio-academy.vercel.app`). Shunda videolaringizni boshqa saytlarga joylab bo'lmaydi.
+3. Kutubxona ichida **API** bo'limiga kiring:
+   - **Video Library ID** (raqam) → `NEXT_PUBLIC_BUNNY_LIBRARY_ID`
+   - **API Key** (uzun kod) → `BUNNY_STREAM_API_KEY` — buni hech kimga bermang, u bilan videolaringizni o'chirish mumkin.
+4. **Security** bo'limida:
+   - **Allowed Domains** ga saytingiz manzilini qo'shing (masalan `bio-academy-delta.vercel.app`). Shunda videolaringizni boshqa saytlarga joylab bo'lmaydi.
+   - **Embed view token authentication** ni yoqing va **Token Authentication Key** ni nusxalang → `BUNNY_TOKEN_KEY`. Shunda video havolasi 6 soatdan keyin ishlamay qoladi va uni boshqalarga tarqatib bo'lmaydi. (Bu kalitni qo'shmasdan token'ni yoqsangiz, videolar ochilmaydi.)
 
-Video yuklash: kutubxonada **Upload** → videoni tanlang → yuklangach, video ustiga bosing va **Video ID** ni (uzun harf-raqamli kod) nusxalang. Uni admin panelda darsga qo'yasiz.
+Video yuklash: admin panelda darsni oching → **🎬 Video** bo'limida **"Videoni Bunny'ga yuklash"** → faylni tanlang → 100% bo'lgach **Saqlash** ni bosing. Bunny videoni 5–15 daqiqada tayyorlaydi. (Xohlasangiz, bunny.net'ning o'zida yuklab, **Video ID** ni qo'lda joylashingiz ham mumkin.)
 
 ## 3-qadam. Anthropic (AI yordamchi)
 
@@ -65,7 +71,7 @@ AI har bir o'quvchiga kuniga **50 ta** savol beradi (o'zgartirish mumkin, pastga
 1. https://vercel.com ga kiring → **Continue with GitHub**.
 2. **Add New…** → **Project** → ro'yxatdan `Bio-academy` repozitoriyini tanlang → **Import**.
    (Agar ro'yxatda ko'rinmasa: **Adjust GitHub App Permissions** ni bosib, shu repozitoriyga ruxsat bering.)
-3. **Environment Variables** bo'limini oching va yozib olgan 4 ta kalitni birma-bir qo'shing (chapda nomi, o'ngda qiymati):
+3. **Environment Variables** bo'limini oching va yozib olgan kalitlarni birma-bir qo'shing (chapda nomi, o'ngda qiymati):
 
    | Name | Value |
    |---|---|
@@ -73,6 +79,8 @@ AI har bir o'quvchiga kuniga **50 ta** savol beradi (o'zgartirish mumkin, pastga
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | 1-qadamdagi anon kalit |
    | `ANTHROPIC_API_KEY` | 3-qadamdagi `sk-ant-...` |
    | `NEXT_PUBLIC_BUNNY_LIBRARY_ID` | 2-qadamdagi Library ID |
+   | `BUNNY_STREAM_API_KEY` | 2-qadamdagi API Key (admin paneldan yuklash uchun) |
+   | `BUNNY_TOKEN_KEY` | 2-qadamdagi Token Authentication Key (ixtiyoriy) |
 
 4. **Deploy** ni bosing va 2–3 daqiqa kuting. Tayyor bo'lgach, saytingiz manzili chiqadi, masalan `https://bio-academy.vercel.app`.
 
@@ -154,7 +162,9 @@ Vercel → Project → **Settings → Environment Variables** da qo'shish mumkin
 
 - **"AI yordamchi hali sozlanmagan"** — Vercel'da `ANTHROPIC_API_KEY` qo'shilmagan yoki qo'shilgandan keyin Redeploy qilinmagan.
 - **Video o'rniga "Video hali joylanmagan"** — dars uchun Video ID kiritilmagan yoki `NEXT_PUBLIC_BUNNY_LIBRARY_ID` qo'shilmagan.
-- **Bunny videosi ochilmaydi** — Bunny → Security → Allowed Domains ga sayt manzili to'g'ri yozilganini tekshiring.
+- **Bunny videosi ochilmaydi** — Bunny → Security → Allowed Domains ga sayt manzili to'g'ri yozilganini tekshiring. Token yoqilgan bo'lsa, `BUNNY_TOKEN_KEY` Vercel'da borligini tekshiring.
+- **"Bunny sozlanmagan" xatosi yuklashda** — Vercel'da `BUNNY_STREAM_API_KEY` yo'q; qo'shing va **Redeploy** qiling.
+- **Video yuklandi, lekin "ishlanmoqda" deb turibdi** — Bunny videoni tayyorlayapti, 5–15 daqiqa kuting.
 - **Tasdiqlash emaili kelmaydi** — Spam papkasini tekshiring. Supabase bepul rejasida soatiga bir necha email yuboradi; ko'p o'quvchi uchun Supabase → Authentication → **SMTP Settings** orqali o'z pochta xizmatingizni ulang (yoki sinov paytida Authentication → Providers → Email → **Confirm email** ni o'chiring).
 - **Admin menyusi chiqmayapti** — 6-qadamdagi SQL'da email to'g'ri yozilganini tekshiring, so'ng saytdan chiqib qayta kiring.
 
