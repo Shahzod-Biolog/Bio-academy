@@ -12,14 +12,14 @@ const SLIDES = [
 
 /** Kurs nomiga qarab linza ichidagi haqiqiy surat (manbalar: /rasmlar-manbasi). Mos kelmasa — DNK spirali. */
 const SPECIMENS: [RegExp, string][] = [
-  [/\bDNK\b|nuklein/i, "/specimens/dnk.jpg"],
-  [/\bATF\b|energiya/i, "/specimens/atf.jpg"],
-  [/botanika|o['‘’`]?simlik/i, "/specimens/botanika.jpg"],
-  [/zoologiya|hayvon/i, "/specimens/zoologiya.jpg"],
-  [/odam|salomatlik|anatomiya/i, "/specimens/odam.jpg"],
-  [/sitologiya|hujayra/i, "/specimens/hujayra.jpg"],
-  [/umumiy biologiya/i, "/specimens/umumiy.jpg"],
-  [/11-sinf|ekosistema|ekologiya/i, "/specimens/ekosistema.jpg"],
+  [/\bDNK\b|nuklein/i, "/specimens/dnk.jpg?v=2"],
+  [/\bATF\b|energiya/i, "/specimens/atf.jpg?v=2"],
+  [/botanika|o['‘’`]?simlik/i, "/specimens/botanika.jpg?v=2"],
+  [/zoologiya|hayvon/i, "/specimens/zoologiya.jpg?v=2"],
+  [/odam|salomatlik|anatomiya/i, "/specimens/odam.jpg?v=2"],
+  [/sitologiya|hujayra/i, "/specimens/hujayra.jpg?v=2"],
+  [/umumiy biologiya/i, "/specimens/umumiy.jpg?v=2"],
+  [/11-sinf|ekosistema|ekologiya/i, "/specimens/ekosistema.jpg?v=2"],
 ];
 
 export function specimenFor(title: string) {
